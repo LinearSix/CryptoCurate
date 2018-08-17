@@ -57,6 +57,8 @@ Profile/snapshot for the card that beautifully displays the selected characteris
 * AJAX
 * CSS framework such as Bootstrap or Semantic
 * Perhaps CSS Grid
+* Firebase (optional)
+* localStorage
 
 ## Feature list
 
