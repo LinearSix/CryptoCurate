@@ -38,24 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectExchange = document.getElementById(`select`);
     // console.log(selectExchange);
     
-    fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
-    .then(response => response.json())
-    .then( (data) => {
-        // log some returned data
-        // console.log(data);
-        let coinObjs = data;
+    // fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
+    // .then(response => response.json())
+    // .then( (data) => {
+    //     // log some returned data
+    //     // console.log(data);
+    //     let coinObjs = data;
 
-        for (let coinObj in coinObjs) {
-            // console.log(coinObjs[coinObj]);
-            let exchangeName = coinObjs[coinObj].name;
-            let exchangeId = coinObjs[coinObj].exchange_id;
-            // console.log(exchangeName)
-            let selectOption = document.createElement(`option`);
-            selectOption.textContent = (`${exchangeName}`);
-            selectOption.value = (`${exchangeId}`);
-            selectExchange.appendChild(selectOption);
-        };
-    });
+    //     for (let coinObj in coinObjs) {
+    //         // console.log(coinObjs[coinObj]);
+    //         let exchangeName = coinObjs[coinObj].name;
+    //         let exchangeId = coinObjs[coinObj].exchange_id;
+    //         // console.log(exchangeName)
+    //         let selectOption = document.createElement(`option`);
+    //         selectOption.textContent = (`${exchangeName}`);
+    //         selectOption.value = (`${exchangeId}`);
+    //         selectExchange.appendChild(selectOption);
+    //     };
+    // });
 });
 
 // python -m SimpleHTTPServer

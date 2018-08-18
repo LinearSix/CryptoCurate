@@ -1,0 +1,51 @@
+body {
+    background-color: black;
+    align-content: center;
+    align-self: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+table {
+    align-self: center;
+    align-content: center;
+    width: 1000px;
+    border-width: 0px;
+    margin: 0px;
+}
+div {
+    width: 1000px;
+    height: 50px;
+    /* border: 1px solid black; */
+    float: left;
+    background: white;
+    /* border-radius: 5px; */
+    font-family: Verdana;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+#middleLeft{
+    width: 300px;
+    height: 50px;
+}
+#middleRight{
+    width: 500px;
+    height: 50px;
+    overflow: scroll;
+}
+#top{
+    float: left;
+    width: 1000px;
+    height: 50px;
+    align-content: center;
+    background-color: darkorchid;
+}
+#middle{
+    background-color: silver;
+}
+#bottom{
+    background-color: darkorchid;
+}
