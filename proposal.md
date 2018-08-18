@@ -50,7 +50,7 @@ Profile/snapshot for the card that beautifully displays the selected characteris
 
 ## What technologies do you plan to use?
 
-*J avaScript
+* JavaScript
 * HTML/CSS
 * DOM Manipulation
 * JSON
@@ -58,7 +58,7 @@ Profile/snapshot for the card that beautifully displays the selected characteris
 * CSS framework such as Bootstrap or Semantic
 * Perhaps CSS Grid
 * Firebase (optional)
-* localStorage
+* localStorage (optional)
 
 ## Feature list
 
