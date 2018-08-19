@@ -35,27 +35,55 @@ document.addEventListener('DOMContentLoaded', function() {
         'Accept-Encoding': 'deflate, gzip'
     });
 
-    let selectExchange = document.getElementById(`select`);
+    let selectExchange = document.getElementById(`selectMain`);
     // console.log(selectExchange);
     
-    // fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
-    // .then(response => response.json())
-    // .then( (data) => {
-    //     // log some returned data
-    //     // console.log(data);
-    //     let coinObjs = data;
+    fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
+    .then(response => response.json())
+    .then( (data) => {
+        // log some returned data
+        // console.log(data);
+        let coinObjs = data;
+        let divScroll = document.getElementById(`middleRight`);
+        let divThumbColor;
 
-    //     for (let coinObj in coinObjs) {
-    //         // console.log(coinObjs[coinObj]);
-    //         let exchangeName = coinObjs[coinObj].name;
-    //         let exchangeId = coinObjs[coinObj].exchange_id;
-    //         // console.log(exchangeName)
-    //         let selectOption = document.createElement(`option`);
-    //         selectOption.textContent = (`${exchangeName}`);
-    //         selectOption.value = (`${exchangeId}`);
-    //         selectExchange.appendChild(selectOption);
-    //     };
-    // });
+        for (let coinObj in coinObjs) {
+            // POPULATE SELECT OPTIONS
+            // console.log(coinObjs[coinObj]);
+            let exchangeName = coinObjs[coinObj].name;
+            let exchangeId = coinObjs[coinObj].exchange_id;
+            // console.log(exchangeName)
+            let selectOption = document.createElement(`option`);
+            selectOption.textContent = (`${exchangeName}`);
+            selectOption.value = (`${exchangeId}`);
+            selectExchange.appendChild(selectOption);
+
+            // POPULATE THUMBNAILS
+            let divThumb = document.createElement(`div`);
+            divThumb.className = (`divThumb`);
+            divThumb.textContent = (`${exchangeName}`);
+            // divThumbColor = `Coin ${i}`;
+            divThumb.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
+            console.log(divThumbColor);
+            divScroll.appendChild(divThumb);
+            
+            // COLOR GENERATOR
+            function hashCode(str) { // java String#hashCode
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                return hash;
+            } 
+            function intToRGB(i){
+                let c = (i & 0x00FFFFFF)
+                .toString(16)
+                .toUpperCase();
+                
+                return "00000".substring(0, 6 - c.length) + c;
+            };
+        };
+    });
 });
 
 // python -m SimpleHTTPServer

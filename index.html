@@ -9,28 +9,32 @@
     <title>CryptoCurate!</title>
 </head>
 <body>
-    <table>
+    <table cellspacing="0" cellpadding="0">
         <tr>
+            <td><div id="logo">CryptoCurate!</div></td>
             <td>
                 <div id="top">
                     <form method="GET">
-                        <select name="search" id="select">
-                            <option value="temp">Test</option>
+                        <input type="text" name="searchInput" id="searchMain" placeholder="Find your Coin!">
+                        <button type="submit" id="submitMain">Go!</button><br/>
+                        <select name="searchSelect" id="selectMain">
+                            <!-- <option value="temp" selected>Test Option 1</option>
+                            <option value="temp">Test Option 2</option> -->
                         </select>
                     </form>
                 </div>
             </td>
         </tr>
         <tr>
-            <td>
-                <div id="middleLeft">temp text left</div>
-                <div id="middleRight">temp text right
-                    fsf fdsafsgfd gfdsgfsdgfdsgfdsg gfdsgs gfdsgfdsgfdsgfs gfdsgfdsgfds gfdsgdfsgfds gasfasdfasdf asdfasdfasf fdsafasdfasdf fdsfdsafdasdfasdf fdsafasdfasdfasdfa fdafdafda fdsafa fdafdsafdasf asdfasdf asdfsa
+            <td colspan="2">
+                <div id="middleLeft">
+                    <div id="cardMain"></div>
                 </div>
+                <div id="middleRight"></div>
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <div id="bottom">temp text</div>
             </td>
         </tr>

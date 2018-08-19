@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: rgb(121, 175, 121);
     align-content: center;
     align-self: auto;
     margin-left: auto;
@@ -8,15 +8,14 @@ body {
     margin-bottom: auto;
 }
 table {
-    align-self: center;
-    align-content: center;
-    width: 1000px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
     border-width: 0px;
-    margin: 0px;
 }
 div {
-    width: 1000px;
-    height: 50px;
+    width: auto;
+    height: auto;
     /* border: 1px solid black; */
     float: left;
     background: white;
@@ -27,25 +26,88 @@ div {
     vertical-align: middle;
     padding: 10px;
 }
+#logo{
+    color: white;
+    text-shadow: rgb(18, 54, 24) 1px 0 20px;
+    width: 400px;
+    height: 70px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    background-color: #b7e7d6;
+}
 #middleLeft{
     width: 300px;
-    height: 50px;
+    height: 400px;
+    background-color: #e6e9e8;
 }
 #middleRight{
-    width: 500px;
-    height: 50px;
+    width: 880px;
+    height: 400px;
     overflow: scroll;
+    background-color: #e6e9e8;
 }
 #top{
     float: left;
-    width: 1000px;
-    height: 50px;
-    align-content: center;
-    background-color: darkorchid;
-}
-#middle{
-    background-color: silver;
+    width: 780px;
+    height: 70px;
+    background-color: #b7e7d6;
 }
 #bottom{
-    background-color: darkorchid;
+    float: left;
+    width: 1200px;
+    height: 50px;
+    align-content: center;
+    background-color: #b7e7d6;
+}
+input#searchMain {
+    color: darkgreen;
+    width: 283px;
+    height: 30px;
+    font-size: 18px;
+    background-color: whitesmoke;
+    border: 0px;
+    padding-left: 15px;
+ }
+select#selectMain {
+    color: darkgreen;
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    background-color: whitesmoke;
+    padding-left: -15px;
+ }
+ button#submitMain{
+     width: 50px;
+     height: 30px;
+     color: white;
+     background-color: #caad4e;
+     border: 1px solid black;
+     border-radius: 5px;
+     margin-bottom: 5px;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+     font-size: 20px;
+ }
+ button#submitMain:hover {
+    background-color: rgb(30, 105, 0);
+    color: white;
+}
+#cardMain{
+    width: 260px;
+    height: 360px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgb(224, 219, 218);
+    margin-left: 8px;
+    margin-top: 8px;
+    box-shadow: 0px 0px 15px darkolivegreen;
+}
+.divThumb{
+    width: 130px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* background-color: rgb(224, 219, 218); */
+    margin: 10px;
+    box-shadow: 0px 0px 15px darkolivegreen;
 }
