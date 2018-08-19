@@ -105,7 +105,7 @@ select#selectMain {
     box-shadow: 0 0px 10px 0 rgb(73, 73, 73);
  }
  button#submitMain:hover {
-    background-color: rgb(242, 247, 0);
+    background-color: aquamarine;
     color: rgb(0, 0, 0);
 }
 #cardMain{
@@ -120,8 +120,8 @@ select#selectMain {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .divThumb{
-    width: 130px;
-    height: 170px;
+    width: 150px;
+    height: 180px;
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
@@ -131,6 +131,22 @@ select#selectMain {
     font-weight: normal;
     color: white;
     text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    padding: 0px;
+    padding-top: 7px;
+}
+.divThumbGuts{
+    width: 130px;
+    height: 142px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    color: black;
+    text-shadow: rgb(255, 255, 255) 0px 0 0px;
+    text-align: left;
+    padding: 5px;
 }
 #topSpace{
     float: none;
