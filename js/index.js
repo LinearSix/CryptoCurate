@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
         {"name": "Bitfinex", "exchange_id": "000008"},
         {"name": "Kraken", "exchange_id": "000009"},
         {"name": "Huobi Pro", "exchange_id": "000010"},
+        {"name": "BitCorn", "exchange_id": "000011"},
+        {"name": "Beonce", "exchange_id": "000012"},
+        {"name": "GODAX", "exchange_id": "000013"},
+        {"name": "Bittramp Ltd.", "exchange_id": "000014"},
+        {"name": "OKCon CNY", "exchange_id": "000015"},
+        {"name": "T-rex", "exchange_id": "000016"},
+        {"name": "COLONIEX", "exchange_id": "000017"},
+        {"name": "Bitfinger", "exchange_id": "000018"},
+        {"name": "Krooked", "exchange_id": "000019"},
+        {"name": "Hubby Pro", "exchange_id": "000020"},
     ]
 
     // I DON'T THINK THIS IS ACTUALLY DOING ANYTHING

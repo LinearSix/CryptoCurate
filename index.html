@@ -15,12 +15,24 @@
             <td>
                 <div id="top">
                     <form method="GET">
-                        <input type="text" name="searchInput" id="searchMain" placeholder="Find your Coin!">
-                        <button type="submit" id="submitMain">Go!</button><br/>
-                        <select name="searchSelect" id="selectMain">
-                            <!-- <option value="temp" selected>Test Option 1</option>
-                            <option value="temp">Test Option 2</option> -->
-                        </select>
+                        <table id="tableInput" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>
+                                    <input type="text" name="searchInput" id="searchMain" placeholder="Search here or select below!">
+                                </td>
+                                <td rowspan="2">
+                                    <button type="submit" id="submitMain">Go!</button>
+                                </td>
+                                <td rowspan="2">
+                                    <div id="topSpace"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="searchSelect" id="selectMain"></select>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -35,7 +47,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <div id="bottom">temp text</div>
+                <div id="bottom"><h4>Powered by coinapi.io</h4></div>
             </td>
         </tr>
     </table>

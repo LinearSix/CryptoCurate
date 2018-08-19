@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(121, 175, 121);
+    background-color: #4eca86;
     align-content: center;
     align-self: auto;
     margin-left: auto;
@@ -13,6 +13,12 @@ table {
     margin-right: auto;
     border-width: 0px;
 }
+/* #tableInput {
+    width: 300px;
+    margin-left: none;
+    margin-right: 200;
+    border-width: 0px;
+} */
 div {
     width: auto;
     height: auto;
@@ -29,29 +35,35 @@ div {
 #logo{
     color: white;
     text-shadow: rgb(18, 54, 24) 1px 0 20px;
-    width: 400px;
+    width: 300px;
     height: 70px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 50px;
     font-weight: bold;
     background-color: #b7e7d6;
+    text-align: left;
+    padding-left: 20px;
+    border-bottom: 1px solid rgb(107, 107, 107);
 }
 #middleLeft{
-    width: 300px;
+    width: 299px;
     height: 400px;
     background-color: #e6e9e8;
+    border-right: 1px solid rgb(107, 107, 107);
 }
 #middleRight{
     width: 880px;
     height: 400px;
     overflow: scroll;
-    background-color: #e6e9e8;
+    background-color: white;
 }
 #top{
-    float: left;
-    width: 780px;
+    float: none;
+    width: 870px;
     height: 70px;
     background-color: #b7e7d6;
+    align-content: left;
+    border-bottom: 1px solid rgb(107, 107, 107);
 }
 #bottom{
     float: left;
@@ -59,6 +71,7 @@ div {
     height: 50px;
     align-content: center;
     background-color: #b7e7d6;
+    border-top: 1px solid rgb(107, 107, 107);
 }
 input#searchMain {
     color: darkgreen;
@@ -68,6 +81,7 @@ input#searchMain {
     background-color: whitesmoke;
     border: 0px;
     padding-left: 15px;
+    margin-top: 5px;
  }
 select#selectMain {
     color: darkgreen;
@@ -78,19 +92,21 @@ select#selectMain {
     padding-left: -15px;
  }
  button#submitMain{
-     width: 50px;
-     height: 30px;
-     color: white;
-     background-color: #caad4e;
-     border: 1px solid black;
-     border-radius: 5px;
-     margin-bottom: 5px;
-     font-family: Verdana, Geneva, Tahoma, sans-serif;
-     font-size: 20px;
+    width: 50px;
+    height: 60px;
+    color: white;
+    background-color: #4eca86;
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    box-shadow: 0 0px 10px 0 rgb(73, 73, 73);
  }
  button#submitMain:hover {
-    background-color: rgb(30, 105, 0);
-    color: white;
+    background-color: rgb(242, 247, 0);
+    color: rgb(0, 0, 0);
 }
 #cardMain{
     width: 260px;
@@ -101,13 +117,32 @@ select#selectMain {
     margin-left: 8px;
     margin-top: 8px;
     box-shadow: 0px 0px 15px darkolivegreen;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .divThumb{
     width: 130px;
-    height: 200px;
+    height: 170px;
     border: 1px solid black;
     border-radius: 5px;
-    /* background-color: rgb(224, 219, 218); */
     margin: 10px;
     box-shadow: 0px 0px 15px darkolivegreen;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    color: white;
+    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+}
+#topSpace{
+    float: none;
+    width: 250px;
+    height: 10px;
+    background-color: #b7e7d6;
+    align-content: left;
+}
+h4{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    size: 15px;
+    font-weight: normal;
+    text-shadow: rgb(8, 24, 11) 1px 0 10px;
 }
