@@ -89,6 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
             selectOption.textContent = (`${exchangeName}`);
             selectOption.value = (`${exchangeId}`);
             selectExchange.appendChild(selectOption);
+            if (exchangeId === searchData) {
+                selectOption.selected = (true);
+            };
 
             // POPULATE MAIN CARD
             if (searchData) {
