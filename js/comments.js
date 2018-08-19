@@ -1,3 +1,9 @@
+    
+    // Can we use search tools built into API?
+    // Should we just have thumbs and sort options?
+    // how the Hell can we sort? array.sort()?
+    // 
+    
     // COIN MARKET CAP API
     // endpoint overview
     // https://pro.coinmarketcap.com/api/v1/cryptocurrency/info?CMC_PRO_API_KEY=00ca39a2-10a7-4617-8eef-897fa860bd8b

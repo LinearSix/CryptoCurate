@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`searchSelect`));
-    // console.log(searchData);
+    let searchAdd = (urlParams.get(`add`));
+    console.log(searchData);
 
     let selectExchange = document.getElementById(`selectMain`);
     // console.log(selectExchange);
@@ -65,11 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let divMiddleLeft = document.getElementById(`middleLeft`);
     let cardMain = document.createElement(`div`);
         cardMain.className = (`cardMain`);
+
+    let cardAdd = document.createElement(`div`);
+        cardAdd.className = (`cardMain`);
         
     let divMainGuts = document.createElement(`div`);
         divMainGuts.className = (`divMainGuts`);
-    // Populate window with coin listing.
-    // guide user to click thumbnail, add input or select from dropdown list
     
     // COMMENT OUT NEXT FOUR LINES FOR OFFLINE TESTING
     fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // POPULATE MAIN CARD
             if (searchData) {
                 if (searchData === exchangeId) {
-                    console.log(searchData);
+                    console.log(`searchData: ${searchData}`);
                     console.log(exchangeId);
                     
                     cardMain.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
@@ -114,6 +116,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             };
 
+            // POPULATE COMPARE CARDS
+            if (searchAdd) {
+                if (searchAdd === exchangeId) {
+                    console.log(`searchAdd: ${searchAdd}`);
+                    console.log(exchangeId);
+                    
+                    cardAdd.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
+                    cardAdd.textContent = (`${exchangeName}`);
+                    divMiddleLeft.appendChild(cardAdd);
+
+                    divMainGuts.innerHTML = (`
+                    Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
+                    <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
+                    <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
+                    <p>ID:${coinObjs[coinObj].exchange_id}</p>
+                    <p>${coinObjs[coinObj].website}</p>
+                    `);
+                    cardAdd.appendChild(divMainGuts);
+                };
+            };
+
             // POPULATE THUMBNAILS
             let divThumb = document.createElement(`div`);
             divThumb.className = (`divThumb`);
@@ -124,8 +147,12 @@ document.addEventListener('DOMContentLoaded', function() {
             Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
             <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
             <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-            <p>ID:${coinObjs[coinObj].exchange_id}</p>
             <p>${coinObjs[coinObj].website}</p>
+            <p><form method="GET">
+            <input type="hidden" name="searchInput" value="">
+            <input type="hidden" name="searchSelect" value="${searchData}">
+            <input type="hidden" name="add" value="${coinObjs[coinObj].exchange_id}">
+            <button type="submit">ADD</button></form></p>
             `)
             divThumb.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
             divThumb.appendChild(divThumbGuts);
