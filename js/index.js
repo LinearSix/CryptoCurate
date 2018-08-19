@@ -29,6 +29,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Plan name: Free
     // https://rest.coinapi.io/
 
+    // TEST OBJECT FOR OFFLINE TESTING
+    const testData = [
+        {"name": "BitCoin", "exchange_id": "000001"},
+        {"name": "Binance", "exchange_id": "000002"},
+        {"name": "GDAX", "exchange_id": "000003"},
+        {"name": "Bitstamp Ltd.", "exchange_id": "000004"},
+        {"name": "OKCoin CNY", "exchange_id": "000005"},
+        {"name": "Bittrex", "exchange_id": "000006"},
+        {"name": "POLONIEX", "exchange_id": "000007"},
+        {"name": "Bitfinex", "exchange_id": "000008"},
+        {"name": "Kraken", "exchange_id": "000009"},
+        {"name": "Huobi Pro", "exchange_id": "000010"},
+    ]
+
+    // I DON'T THINK THIS IS ACTUALLY DOING ANYTHING
     let headerCoinApi = new Headers({
         'X-CoinAPI-Key': '345FCF08-5D2C-432A-8FA1-7B4972E7FD53',
         'Accept': 'application/json',
@@ -38,18 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectExchange = document.getElementById(`selectMain`);
     // console.log(selectExchange);
     
-    fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
-    .then(response => response.json())
-    .then( (data) => {
-        // log some returned data
+    // COMMENT OUT NEXT FOUR LINES FOR OFFLINE TESTING
+    // fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
+    // .then(response => response.json())
+    // .then( (data) => {
         // console.log(data);
-        let coinObjs = data;
+        let coinObjs = testData; //data;
         let divScroll = document.getElementById(`middleRight`);
         let divThumbColor;
 
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
-            // console.log(coinObjs[coinObj]);
+            console.log(coinObjs[coinObj]);
             let exchangeName = coinObjs[coinObj].name;
             let exchangeId = coinObjs[coinObj].exchange_id;
             // console.log(exchangeName)
@@ -83,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return "00000".substring(0, 6 - c.length) + c;
             };
         };
-    });
+    // }); // COMMENT OUT FOR OFFLINE TESTING
 });
 
 // python -m SimpleHTTPServer
