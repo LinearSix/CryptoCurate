@@ -19,14 +19,25 @@ document.addEventListener('DOMContentLoaded', function() {
     let urlParams = new URLSearchParams(window.location.search);
     // assign value of "add" to variable
     let searchAdd = (urlParams.get(`add`));
+    let searchRemove = (urlParams.get(`remove`));
     let splitAdd = [];
+    let splitTemp = [];
     if (searchAdd) {
-        splitAdd = searchAdd.split(",");
-        splitAdd.splice(0, 1);
-        console.log(splitAdd);
+        splitTemp = searchAdd.split(",");
+        splitTemp.splice(0, 1);
+        if (searchRemove) {
+            for (let i in splitTemp) {
+                if (splitTemp[i] !== searchRemove) {
+                    splitAdd.push(splitTemp[i]);
+                };
+            };
+        } else {
+            splitAdd = splitTemp;
+        }
     } else {
         splitAdd = [];
-    }
+    };
+    
 
     // populate div with thumbs of array items
     let divMasterLeft = document.getElementById(`masterRight`);
@@ -34,16 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (let add in splitAdd) {
         // create large style div inside its own form
-        formLarge = document.createElement(`div`);
-        formLarge.innerHTML = (`
-        <form method="GET">
-        <div class="divFull">${splitAdd[add]}
-        <input type="hidden" name="remove" value="${splitAdd[add]}">
-        <button type="submit">REMOVE</button>
-        </div>
-        </form>
-        `);
-        divMasterLeft.appendChild(formLarge);
+        // if (splitAdd[add] !== searchRemove) {
+            formLarge = document.createElement(`div`);
+            formLarge.innerHTML = (`
+            <form method="GET">
+            <div class="divFull">${splitAdd[add]}
+            <input type="hidden" name="remove" value="${splitAdd[add]}">
+            <input type="hidden" name="add" value="${searchAdd}">
+            <button type="submit">REMOVE</button>
+            </div>
+            </form>
+            `);
+            divMasterLeft.appendChild(formLarge);
+        // };
     };
 
     // cmopare large and thumb arrays for difference

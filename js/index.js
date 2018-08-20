@@ -72,20 +72,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
     let divMainGuts = document.createElement(`div`);
         divMainGuts.className = (`divMainGuts`);
-    
-    // COMMENT OUT NEXT FOUR LINES FOR OFFLINE TESTING
-    fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
-    .then(response => response.json())
-    .then( (data) => {
-        // console.log(data);
-        let coinObjs = data;//testData; 
-        let divScroll = document.getElementById(`middleRight`);
+
+    // // COINAPI.IO API
+    // fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
+    // .then(response => response.json())
+    // .then( (data) => {
+        
+    // COINMARKETCAP.COM API
+    fetch(`https://cors-anywhere.herokuapp.com/https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`)
+        .then(response => response.json())
+        .then( (data) => {
+        console.log(data);
+        let coinObjs = data.data;
+        let divScroll = document.getElementById(`middleThumb`);
 
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
             // console.log(coinObjs[coinObj]);
             let exchangeName = coinObjs[coinObj].name;
-            let exchangeId = coinObjs[coinObj].exchange_id;
+            let exchangeId = coinObjs[coinObj].id;
+            let exchangeSymbol = coinObjs[coinObj].symbol;
+            let exchangeRank = coinObjs[coinObj].Rank;
+            let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
+            let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
+            let exchangePrice = coinObjs[coinObj].quotes.USD.price;
             // console.log(exchangeName)
             let selectOption = document.createElement(`option`);
             selectOption.textContent = (`${exchangeName}`);
@@ -96,58 +106,58 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             // POPULATE MAIN CARD
-            if (searchData) {
-                if (searchData === exchangeId) {
-                    console.log(`searchData: ${searchData}`);
-                    console.log(exchangeId);
+            // if (searchData) {
+            //     if (searchData === exchangeId) {
+            //         console.log(`searchData: ${searchData}`);
+            //         console.log(exchangeId);
                     
-                    cardMain.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
-                    cardMain.textContent = (`${exchangeName}`);
-                    divMiddleLeft.appendChild(cardMain);
+            //         cardMain.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
+            //         cardMain.textContent = (`${exchangeName}`);
+            //         divMiddleLeft.appendChild(cardMain);
 
-                    divMainGuts.innerHTML = (`
-                    Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-                    <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-                    <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-                    <p>ID:${coinObjs[coinObj].exchange_id}</p>
-                    <p>${coinObjs[coinObj].website}</p>
-                    `);
-                    cardMain.appendChild(divMainGuts);
-                };
-            };
+            //         divMainGuts.innerHTML = (`
+            //         Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
+            //         <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
+            //         <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
+            //         <p>ID:${coinObjs[coinObj].exchange_id}</p>
+            //         <p>${coinObjs[coinObj].website}</p>
+            //         `);
+            //         cardMain.appendChild(divMainGuts);
+            //     };
+            // };
 
-            // POPULATE COMPARE CARDS
-            if (searchAdd) {
-                if (searchAdd === exchangeId) {
-                    console.log(`searchAdd: ${searchAdd}`);
-                    console.log(exchangeId);
+            // // POPULATE COMPARE CARDS
+            // if (searchAdd) {
+            //     if (searchAdd === exchangeId) {
+            //         console.log(`searchAdd: ${searchAdd}`);
+            //         console.log(exchangeId);
                     
-                    cardAdd.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
-                    cardAdd.textContent = (`${exchangeName}`);
-                    divMiddleLeft.appendChild(cardAdd);
+            //         cardAdd.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
+            //         cardAdd.textContent = (`${exchangeName}`);
+            //         divMiddleLeft.appendChild(cardAdd);
 
-                    divMainGuts.innerHTML = (`
-                    Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-                    <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-                    <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-                    <p>ID:${coinObjs[coinObj].exchange_id}</p>
-                    <p>${coinObjs[coinObj].website}</p>
-                    `);
-                    cardAdd.appendChild(divMainGuts);
-                };
-            };
+            //         divMainGuts.innerHTML = (`
+            //         Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
+            //         <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
+            //         <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
+            //         <p>ID:${coinObjs[coinObj].exchange_id}</p>
+            //         <p>${coinObjs[coinObj].website}</p>
+            //         `);
+            //         cardAdd.appendChild(divMainGuts);
+            //     };
+            // };
 
             // POPULATE THUMBNAILS
             let divThumb = document.createElement(`div`);
             divThumb.className = (`divThumb`);
-            divThumb.textContent = (`${exchangeName}`);
+            divThumb.textContent = (`${exchangeName} (${exchangeSymbol})`);
             let divThumbGuts = document.createElement(`div`);
             divThumbGuts.className = (`divThumbGuts`);
             divThumbGuts.innerHTML = (`
-            Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-            <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-            <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-            <p>${coinObjs[coinObj].website}</p>
+            Rank: ${exchangeRank}</p>
+            <p>24hr % change: </br>${exchangePct24}</p>
+            <p>Vol: </br>${exchangeVol24}</p>
+            <p>Price: ${exchangePrice}</p>
             <p><form method="GET">
             <input type="hidden" name="searchInput" value="">
             <input type="hidden" name="searchSelect" value="${searchData}">
