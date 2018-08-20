@@ -15,8 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let urlParams = new URLSearchParams(window.location.search);
     let searchAdd = (urlParams.get(`add`));
+    let divAdd;
     console.log(searchAdd);
 
+    let addArray = [];
+    addArray.push(searchAdd);
+    console.log(addArray);
+
+    let divMaster = document.getElementById(`master`);
+    console.log(divMaster);
+
+    for (let card in addArray) {
+        divAdd = document.createElement(`div`);
+        divAdd.textContent = (`${addArray[card]}`);
+        console.log(divAdd);
+        divMaster.appendChild(divAdd);
+    };
 
 });
 
