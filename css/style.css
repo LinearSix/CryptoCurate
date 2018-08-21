@@ -43,7 +43,7 @@ div {
 }
 #middleMain{
     width: 99%;
-    height: 0px;
+    /* height: 200px; */
     background-color: #e6e9e8;
     border-top: 1px solid rgb(107, 107, 107);
     overflow: hidden;
@@ -112,40 +112,40 @@ select#selectMain {
     color: rgb(0, 0, 0);
 }
 .cardMain{
-    width: 260px;
-    height: 360px;
+    width: 200px;
+    height: 250px;
     border: 2px solid black;
     border-radius: 5px;
     background-color: rgb(224, 219, 218);
-    margin-left: 8px;
-    margin-top: 8px;
-    box-shadow: 0px 0px 15px darkolivegreen;
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     color: white;
-    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
     padding: 0px;
-    padding-top: 10px;
+    padding-top: 6px;
 }
 .divThumb{
     width: 150px;
-    height: 180px;
+    height: 160px;
     border: 1px solid black;
     border-radius: 1px;
-    margin: 10px;
+    margin: 6px;
     box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: normal;
     color: white;
-    -webkit-text-stroke: 1px black;
-    text-shadow: rgb(0, 0, 0) 0px 0px 2px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
     padding: 0px;
-    padding-top: 7px;
+    padding-top: 2px;
 }
 .divMainGuts{
-    width: 239px;
-    height: 305px;
+    width: 176px;
+    height: 199px;
+    border: 1px solid black;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin: 5px;
@@ -155,15 +155,16 @@ select#selectMain {
     color: black;
     text-shadow: rgb(255, 255, 255) 0px 0 0px;
     text-align: left;
-    padding: 5px;
+    padding: 6px;
     padding-top: 10px;
 }
 .divThumbGuts{
-    width: 130px;
-    height: 142px;
+    width: 132px;
+    height: 126px;
+    border: 1px solid black;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin: 5px;
+    margin: 3px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10px;
     font-weight: normal;

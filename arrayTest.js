@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // cmopare large and thumb arrays for difference
+    // compare large and thumb arrays for difference
     let difference = function(arrayOne, arrayTwo) {
         // Place your solution here
         let arrayOneSample;
