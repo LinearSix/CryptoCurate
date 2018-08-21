@@ -1,7 +1,7 @@
 
 //cryptoNonFinancial is an object of information about 38 coins. 
-const cryptoNonFinancial = [
-  {
+const cryptoNonFinancial = {
+  "Primecoin" : {
     "year": 2013,
     "status": "Active",
     "name": "Primecoin",
@@ -12,7 +12,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Uses the finding of prime chains composed of Cunningham chains and bi-twin chains for proof-of-work, which can lead to useful byproducts."
   },
-  {
+  "Coinye":{
     "year": 2014,
     "status": "Inactive",
     "name": "Coinye",
@@ -23,7 +23,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Used American hip hop artist Kanye West as its mascot, abandoned after trademark lawsuit."
   },
-  {
+  "Synereo AMP":{
     "year": 2014,
     "status": "Active",
     "name": "Synereo AMP",
@@ -34,7 +34,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoS",
     "description": "Trying to create a world computer, Synereo’s 2.0 tech stack incorporates all faculties needed to support decentralized computation without central servers.[51]"
   },
-  {
+  "MazaCoin":{
     "year": 2014,
     "status": "Active",
     "name": "MazaCoin",
@@ -45,7 +45,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "The underlying software is derived from that of another cryptocurrency, ZetaCoin."
   },
-  {
+  "Zcash":{
     "year": 2016,
     "status": "Active",
     "name": "Zcash",
@@ -56,7 +56,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "The first open, permissionless financial system employing zero-knowledge security."
   },
-  {
+  "NEM":{
     "year": 2014,
     "status": "Active",
     "name": "NEM",
@@ -67,7 +67,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "POI",
     "description": "The first hybrid public/private blockchain solution built from scratch, and first to use the Proof of Importance algorithm using EigenTrust++ reputation system."
   },
-  {
+  "Bitcoin":{
     "year": 2009,
     "status": "Active",
     "name": "Bitcoin",
@@ -78,7 +78,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "The first decentralized ledger currency. Cryptocurrency with the most famous, popular, notable and highest market capitalization."
   },
-  {
+  "Litecoin":{
     "year": 2011,
     "status": "Active",
     "name": "Litecoin",
@@ -89,7 +89,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "The first cryptocurrency to use Scrypt as a hashing algorithm."
   },
-  {
+  "Peercoin":{
     "year": 2012,
     "status": "Active",
     "name": "Peercoin",
@@ -100,7 +100,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW & PoS",
     "description": "The first cryptocurrency to use POW and POS functions."
   },
-  {
+  "Titcoin":{
     "year": 2014,
     "status": "Active",
     "name": "Titcoin",
@@ -111,7 +111,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "The first cryptocurrency to be nominated for a major adult industry award.[54]"
   },
-  {
+  "Gridcoin":{
     "year": 2013,
     "status": "Active",
     "name": "Gridcoin",
@@ -122,7 +122,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "Decentralized PoS",
     "description": "The first cryptocurrency linked to citizen science through the Berkeley Open Infrastructure for Network Computing[27][28]"
   },
-  {
+  "Tether":{
     "year": 2015,
     "status": "Active",
     "name": "Tether",
@@ -133,10 +133,10 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Tether is backed by the USD so that one tether is exactly equal to US$1. It is commonly used to convert other cryptocurrencies to USD.[68]"
   },
-  {
+  "Ethereum":{
     "year": 2015,
     "status": "Active",
-    "name": "Ether or \"Ethereum",
+    "name": "Ethereum",
     "ticker": "ETH",
     "founder": "Vitalik Buterin[60]",
     "hashAlgorithm": "Ethash[61]",
@@ -144,7 +144,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Supports Turing-complete smart contracts."
   },
-  {
+  "Nxt":{
     "year": 2013,
     "status": "Active",
     "name": "Nxt",
@@ -155,7 +155,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoS",
     "description": "Specifically designed as a flexible platform to build applications and financial services around its protocol."
   },
-  {
+  "Bitcoin Private":{
     "year": 2018,
     "status": "Active",
     "name": "Bitcoin Private",
@@ -166,7 +166,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "private, decentralized, fast, open source, community-driven coin implementing zkSNARK for privacy protection/anonymous payments. Hardfork (co-fork) of BTC and ZClassic"
   },
-  {
+  "Monero":{
     "year": 2014,
     "status": "Active",
     "name": "Monero",
@@ -177,7 +177,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Privacy-centric coin using the CryptoNote protocol with improvements for scalability and decentralization."
   },
-  {
+  "Stellar":{
     "year": 2014,
     "status": "Active",
     "name": "Stellar",
@@ -188,10 +188,10 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "Stellar Consensus Protocol (SCP) [56]",
     "description": "Open-source, decentralized global financial network. The usage is for remittances, micropayments, services for the underbanked, mobile money/branches and professional setups."
   },
-  {
+  "Waves":{
     "year": 2016,
     "status": "Active",
-    "name": "Waves platform",
+    "name": "Waves",
     "ticker": "WAVES",
     "founder": "Sasha Ivanov",
     "hashAlgorithm": "PoS",
@@ -199,7 +199,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoS",
     "description": "Open blockchain platform, featuring token creation, distributed exchange and fast, high volume, transactions designed for ease of use[71] and mass adoption."
   },
-  {
+  "Vertcoin":{
     "year": 2014,
     "status": "Active",
     "name": "Vertcoin",
@@ -210,7 +210,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Next-gen ASIC resistance and first to implement stealth addresses."
   },
-  {
+  "KodakCoin":{
     "year": 2018,
     "status": "Inactive",
     "name": "KodakCoin",
@@ -221,7 +221,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "",
     "description": "KodakCoin is a \"photographer-centric\" blockchain cryptocurrency used for payments for licensing photographs."
   },
-  {
+  "Bitcoin Cash":{
     "year": 2017,
     "status": "Active",
     "name": "Bitcoin Cash",
@@ -232,7 +232,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Hard fork from Bitcoin, Increased Block size from 1mb to 8mb"
   },
-  {
+  "SwiftCoin":{
     "year": 2011,
     "status": "Active",
     "name": "SwiftCoin",
@@ -243,7 +243,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "First digital coin with theoretical value based on the work required to produce electricity. First block chain to support currency creation by interest paid on debt. Solidus Bond proto smart-contract. One of the first digital coins patented in the US. First block chain to support encrypted mail with attachments."
   },
-  {
+  "Bytecoin":{
     "year": 2012,
     "status": "Active",
     "name": "Bytecoin",
@@ -254,7 +254,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "First cryptocurrency based on the CryptoNote algorithm. Focused on user privacy through impassive and anonymous transactions"
   },
-  {
+  "Petro":{
     "year": 2018,
     "status": "Active",
     "name": "Petro",
@@ -265,7 +265,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "",
     "description": "First cryptocurrency backed by Venezuela's reserves of oil."
   },
-  {
+  "EOS.IO":{
     "year": 2017,
     "status": "Active",
     "name": "EOS.IO",
@@ -276,7 +276,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "delegated PoS",
     "description": "Feeless Smart contract platform for decentralized applications and decentralized autonomous corporationswith a block time of 500 ms.[74]"
   },
-  {
+  "PotCoin":{
     "year": 2014,
     "status": "Active",
     "name": "PotCoin",
@@ -287,7 +287,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoS",
     "description": "Developed to service the legalized cannabis industry"
   },
-  {
+  "Ripple":{
     "year": 2013,
     "status": "Active",
     "name": "Ripple",
@@ -298,7 +298,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "Consensus",
     "description": "Designed for peer to peer debt transfer. Not based on bitcoin."
   },
-  {
+  "Auroracoin":{
     "year": 2014,
     "status": "Active",
     "name": "Auroracoin",
@@ -309,7 +309,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Created as an alternative to fiat currency in Iceland."
   },
-  {
+  "NEO":{
     "year": 2014,
     "status": "Active",
     "name": "NEO",
@@ -320,7 +320,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "dBFT",
     "description": "Chinese based cryptocurrency (formerly ANT Shares which produce ANT Coins) name change August 2017 to NEO and GAs, these enable the development of digital assets and smart contracts."
   },
-  {
+  "Decred":{
     "year": 2016,
     "status": "Active",
     "name": "Decred",
@@ -331,7 +331,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW/PoS Hybrid",
     "description": "Built in governance and hybrid PoW/PoS."
   },
-  {
+  "BitConnect":{
     "year": 2017,
     "status": "Active",
     "name": "BitConnect",
@@ -342,7 +342,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "",
     "description": "BitConnect is an open source all in one bitcoin and crypto community platform designed to provide multiple investment opportunities with cryptocurrency education"
   },
-  {
+  "Dogecoin":{
     "year": 2013,
     "status": "Active",
     "name": "Dogecoin",
@@ -353,7 +353,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Based on an internet meme."
   },
-  {
+  "Feathercoin":{
     "year": "2013[21]",
     "status": "Active",
     "name": "Feathercoin",
@@ -364,7 +364,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "N/A",
     "description": "Approx. 60 seconds block time"
   },
-  {
+  "Ethereum Classic":{
     "year": 2015,
     "status": "Active",
     "name": "Ethereum Classic",
@@ -375,7 +375,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "An alternative version of Ethereum[63]whose blockchain does not include the DAO Hard-fork.[64][65] Supports Turing-complete smart contracts."
   },
-  {
+  "Namecoin":{
     "year": 2011,
     "status": "Active",
     "name": "Namecoin",
@@ -386,7 +386,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": "Also acts as an alternative, decentralized DNS."
   },
-  {
+  "DASH":{
     "year": 2014,
     "status": "Active",
     "name": "Dash",
@@ -397,7 +397,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW & Proof of Service[nt 2]",
     "description": "A bitcoin-based currency featuring instant transactions, decentralized governance and budgeting, and private transactions."
   },
-  {
+  "Verge":{
     "year": 2014,
     "status": "Active",
     "name": "Verge",
@@ -408,7 +408,7 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "PoW",
     "description": ""
   },
-  {
+  "Cardano":{
     "year": 2018,
     "status": "Active",
     "name": "Cardano",
@@ -419,12 +419,8 @@ const cryptoNonFinancial = [
     "consensusAlgorithm": "Ouroboros PoS",
     "description": ""
   }
-]
+}
 
 //A Few Templates for Accessing Data
-for (let element of cryptoNonFinancial) {
-    if (element.name === 'Bitcoin') {
-      //console.log(element.year)
-    }
-  }
+
 

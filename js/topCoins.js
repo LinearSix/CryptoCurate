@@ -2119,4 +2119,3 @@ const nameId = {}
 for (let key in topCoins.data) {
       nameId[topCoins.data[key].name] = topCoins.data[key].id;
     }
-console.log(nameId)

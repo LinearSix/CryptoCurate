@@ -1,5 +1,6 @@
-console.log(`coin`);
 document.addEventListener('DOMContentLoaded', function() {
+    console.log(`we are connected`);
+
 // Cors Anywhere!    
     let cors = `https://cors-anywhere.herokuapp.com/`
 //coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
@@ -9,12 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
         coinMap[cryptoCompData.Data[key].CoinName] = {}
         coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
         coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
+        coinMap[cryptoCompData.Data[key].CoinName].logo = `https://www.cryptocompare.com${cryptoCompData.Data[key].ImageUrl}`
+        coinMap[cryptoCompData.Data[key].CoinName].algorithm = cryptoCompData.Data[key].Algorithm
+        coinMap[cryptoCompData.Data[key].CoinName].proofType = cryptoCompData.Data[key].ProofType
     }
     //using topCoins from Coin Market Cap to add search ID to coinMap
     for (let key in coinMap) {
         coinMap[key].id = nameId[coinMap[key].name]
     }
-   
+  console.log(coinMap);
 // below are variables that are used for getting data from query string
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
@@ -58,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             break;
         case `volume`:
             searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=volume_24h`;
-            searchMessage = `Displaying Top 25 Coins by Volume - 24 Hours`;
+            searchMessage = `Displaying Top 25 Coins by Trade Volume - 24 Hours`;
             break;
         case `volitility`:
             searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=percent_change_24h`;
@@ -71,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
     divMessage = document.getElementById(`searchMessage`);
     divMessage.textContent = (`${searchMessage}`);
 
-// FETCH FROM COINMARKETCAP.COM API
+// FETCH 
+//FROM COINMARKETCAP.COM API
     fetch(`${cors}${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
@@ -102,10 +107,19 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
-            let releaseYear;
-            let logo;
+            //let releaseYear = cryptoNonFinancial[`${exchangeName}`].year;
+            let logo = (coinMap[exchangeName].logo ? coinMap[exchangeName].logo : ''); console.log(logo)
             let maxSupply = coinObjs[coinObj].max_supply;
+            //let description = cryptoNonFinancial[`${exchangeName}`].description;
+            let circulatingSupply = coinObjs[coinObj].circulating_supply;
+            let prooftype = coinMap[exchangeName].prooftype;
+            let algorithm = coinMap[exchangeName].algorithm;
+            //let founder= cryptoNonFinancial[`${exchangeName}`].founder;
+            let buy = 'https://poloniex.com/'
 
+
+            
+        
             // POPULATE MAIN CARD
             if (searchAdd) {
                 if (Number(searchAdd) === Number(exchangeId)) {
