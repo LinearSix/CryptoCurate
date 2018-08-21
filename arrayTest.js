@@ -21,22 +21,31 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
     let splitAdd = [];
-    let splitTemp = [];
-    if (searchAdd) {
+    let splitTemp;
+    if (searchAdd && searchRemove) {
+        splitTemp = [];
         splitTemp = searchAdd.split(",");
-        splitTemp.splice(0, 1);
-        if (searchRemove) {
-            for (let i in splitTemp) {
-                if (splitTemp[i] !== searchRemove) {
-                    splitAdd.push(splitTemp[i]);
-                };
+        for (item in splitTemp) {
+            if (splitTemp[item] !== "null" && splitTemp[item] !== searchRemove) {
+                splitAdd.push(splitTemp[item]);
             };
-        } else {
-            splitAdd = splitTemp;
-        }
-    } else {
-        splitAdd = [];
-    };
+        };
+        searchAdd = splitAdd.join();
+        console.log(splitAdd);
+        console.log(searchAdd);
+    } else if (searchAdd) {
+        splitTemp = [];
+        splitTemp = searchAdd.split(",");
+        for (item in splitTemp) {
+            if (splitTemp[item] !== "null") {
+                splitAdd.push(splitTemp[item]);
+            };
+        };
+        searchAdd = splitAdd.join();
+        console.log(splitAdd);
+        console.log(searchAdd);
+    }
+
     
 
     // populate div with thumbs of array items
@@ -44,20 +53,31 @@ document.addEventListener('DOMContentLoaded', function() {
     let formLarge;
 
     for (let add in splitAdd) {
-        // create large style div inside its own form
-        // if (splitAdd[add] !== searchRemove) {
+        if (searchAdd === null) {
+            // create large style div inside its own form
             formLarge = document.createElement(`div`);
             formLarge.innerHTML = (`
             <form method="GET">
             <div class="divFull">${splitAdd[add]}
             <input type="hidden" name="remove" value="${splitAdd[add]}">
-            <input type="hidden" name="add" value="${searchAdd}">
             <button type="submit">REMOVE</button>
             </div>
             </form>
             `);
             divMasterLeft.appendChild(formLarge);
-        // };
+        } else {
+            formLarge = document.createElement(`div`);
+            formLarge.innerHTML = (`
+            <form method="GET">
+            <div class="divFull">${splitAdd[add]}
+            <input type="hidden" name="add" value="${searchAdd}">
+            <input type="hidden" name="remove" value="${splitAdd[add]}">
+            <button type="submit">REMOVE</button>
+            </div>
+            </form>
+            `);
+            divMasterLeft.appendChild(formLarge);
+        }
     };
 
     // cmopare large and thumb arrays for difference
@@ -85,17 +105,29 @@ document.addEventListener('DOMContentLoaded', function() {
     let formThumb;
 
     for (let item in difference(testArray, splitAdd)) {
-
-        formThumb = document.createElement(`div`);
-        formThumb.innerHTML = (`
-        <form method="GET">
-        <div class="divThumb">${testArray[item]}
-        <input type="hidden" name="add" value="${searchAdd},${testArray[item]}">
-        <button type="submit">ADD</button>
-        </div>
-        </form>
-        `);
-        divMasterRight.appendChild(formThumb);
+        if (searchAdd === null) {
+            formThumb = document.createElement(`div`);
+            formThumb.innerHTML = (`
+            <form method="GET">
+            <div class="divThumb">${testArray[item]}
+            <input type="hidden" name="add" value="${testArray[item]}">
+            <button type="submit">ADD</button>
+            </div>
+            </form>
+            `);
+            divMasterRight.appendChild(formThumb);
+        } else {
+            formThumb = document.createElement(`div`);
+            formThumb.innerHTML = (`
+            <form method="GET">
+            <div class="divThumb">${testArray[item]}
+            <input type="hidden" name="add" value="${searchAdd},${testArray[item]}">
+            <button type="submit">ADD</button>
+            </div>
+            </form>
+            `);
+            divMasterRight.appendChild(formThumb);
+        }
     };
 });
 

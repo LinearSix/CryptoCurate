@@ -11,17 +11,18 @@
 <body>
     <table cellspacing="0" cellpadding="0">
         <tr>
-            <td><div id="logo">CryptoCurate!</div></td>
+            <td><div id="logo">CryptoCurate</div></td>
             <td>
                 <div id="top">
                     <form method="GET">
                         <table id="tableInput" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td>
-                                    <input type="text" name="searchInput" id="searchMain" placeholder="Search here or select below!">
+                                    <input type="text" name="searchInput" id="searchMain" list="huge_list" placeholder="Search here or select below!">
+                                    <datalist id="huge_list"></datalist>
                                 </td>
                                 <td rowspan="2">
-                                    <button type="submit" id="submitMain">Go!</button>
+                                    <button type="submit" id="submitMain">Go</button>
                                 </td>
                                 <td rowspan="2">
                                     <div id="topSpace"></div>
@@ -39,15 +40,19 @@
         </tr>
         <tr>
             <td colspan="2">
-                <div id="middleLeft">
-                    <!-- <div id="cardMain"></div> -->
-                </div>
-                <div id="middleRight"></div>
+                <div id="middleMain"></div>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <div id="bottom"><h4>Powered by coinapi.io</h4></div>
+                <!-- <div> -->
+                    <div id="middleThumb"></div>
+                <!-- </div> -->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="bottom"><h4>Powered by coinmarketcap.com</h4></div>
             </td>
         </tr>
     </table>
