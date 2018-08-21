@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchRemove = (urlParams.get(`remove`));
     console.log(searchData);
 
+
     // HANDLE QUERYSTRING 
     let splitAdd = [];
     let splitTemp;
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
     let divMainGuts = document.createElement(`div`);
         divMainGuts.className = (`divMainGuts`);
+
 
     let cors = `https://cors-anywhere.herokuapp.com/`
     let searchMessage;
@@ -111,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (Number(searchAdd) === Number(exchangeId)) {
                     // console.log(`searchData: ${searchData}`);
                     // console.log(exchangeId);
+
                     
                     cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                     cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);

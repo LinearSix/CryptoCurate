@@ -1,3 +1,7 @@
+
+    //Example for object navigation
+//console.log(topCoins.data[nameId.Bitcoin].quotes.USD.percent_change_24h)
+
 const topCoins = {
     "data": {
         "1": {
@@ -2108,5 +2112,11 @@ const topCoins = {
     }
 }
 
+//nameId is an oject contain key-value pairs with crytpocurrency name as key and Id as value {name: id}
+//build nameId from topCoins object
+const nameId = {}
 
-module.exports = topCoins;
+for (let key in topCoins.data) {
+      nameId[topCoins.data[key].name] = topCoins.data[key].id;
+    }
+console.log(nameId)
