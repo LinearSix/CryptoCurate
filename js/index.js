@@ -1,10 +1,13 @@
 console.log(`coin`);
+
 // const lightenColor = require('./colors.js');
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    console.log(testArray);
+
     let urlParams = new URLSearchParams(window.location.search);
-    let searchData = (urlParams.get(`searchSelect`));
+    let searchData = (urlParams.get(`search`));
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
     console.log(searchData);
@@ -49,9 +52,33 @@ document.addEventListener('DOMContentLoaded', function() {
         
     let divMainGuts = document.createElement(`div`);
         divMainGuts.className = (`divMainGuts`);
-        
+
+    let cors = `https://cors-anywhere.herokuapp.com/`
+    let searchMessage;
+
+    switch (searchData) {
+        case `rank`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
+            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            break;
+        case `volume`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=volume_24h`;
+            searchMessage = `Displaying Top 25 Coins by Volume - 24 Hours`;
+            break;
+        case `volitility`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=percent_change_24h`;
+            searchMessage = `Displaying Top 25 Coins by Volitility - 24 hours`;
+            break;
+        default:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
+            searchMessage = `Displaying Top 100 Coins by Market Cap`;
+    };
+
+    divMessage = document.getElementById(`searchMessage`);
+    divMessage.textContent = (`${searchMessage}`);
+
     // FETCH FROM COINMARKETCAP.COM API
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`)
+    fetch(`${cors}${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
         console.log(data);
@@ -66,10 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let selectOption = document.createElement(`option`);
             selectOption.textContent = (`${exchangeName}`);
             selectOption.value = (`${exchangeId}`);
-            selectExchange.appendChild(selectOption);
-            if (exchangeId === searchData) {
-                selectOption.selected = (true);
-            };
+            // selectExchange.appendChild(selectOption);
 
             // CONTINUE DECLARING ATTRIBUTE VARIABLES FOR CARDS
             let exchangeSymbol = coinObjs[coinObj].symbol;
@@ -94,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     divMainGuts.innerHTML = (`
                     Rank: ${exchangeRank}</p>
-                    <p>24hr % change: ${exchangePct24}</p>
+                    <p>24hr %Change: ${exchangePct24}</p>
                     <p>Vol: ${exchangeVol24}</p>
-                    <p>Price(USD): $${exchangePrice}</p>
+                    <p>Price(USD): $${round(exchangePrice, 2)}</p>
                     <p>Mkt Cap: ${marketCap}</p>
                     <p>Max Supply: ${maxSupply}</p>
                     <p>Circulating Supply: ${circSupply}</p>
@@ -152,10 +176,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 divThumbGuts.className = (`divThumbGuts`);
                 divThumbGuts.innerHTML = (`
                 Rank: ${exchangeRank}</p>
-                <p>24hr % change: ${exchangePct24}</p>
+                <p>24hr %Change: ${exchangePct24}</p>
                 <p>Vol: </br>${exchangeVol24}</p>
-                <p>Price(USD): $${exchangePrice}</p>
+                <p>Price(USD): $${round(exchangePrice, 2)}</p>
                 <p><form method="GET">
+                <input type="hidden" name="search" value="${searchData}">
                 <input type="hidden" name="add" value="${exchangeId}">
                 <button type="submit">ADD</button></form></p>
                 `)
@@ -172,8 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 Rank: ${exchangeRank}</p>
                 <p>24hr % change: ${exchangePct24}</p>
                 <p>Vol: </br>${exchangeVol24}</p>
-                <p>Price(USD): $${exchangePrice}</p>
+                <p>Price(USD): $${round(exchangePrice, 2)}</p>
                 <p><form method="GET">
+                <input type="hidden" name="search" value="${searchData}">
                 <input type="hidden" name="add" value="${searchAdd},${exchangeId}">
                 <button type="submit">ADD</button></form></p>
                 `)
@@ -182,31 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 divScroll.appendChild(divThumb);
             }
         };
-
-        // COLOR GENERATOR
-        function hashCode(str) { // java String#hashCode
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            return hash;
-        } 
-        function intToRGB(i){
-            let c = (i & 0x00FFFFFF)
-            .toString(16)
-            .toUpperCase();
-            return "00000".substring(0, 6 - c.length) + c;
-        };
-        function lightenColor(color, percent) {
-            var num = parseInt(color,16),
-                amt = Math.round(2.55 * percent),
-                R = (num >> 16) + amt,
-                B = (num >> 8 & 0x00FF) + amt,
-                G = (num & 0x0000FF) + amt;
-        
-                return (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
-        };
-
     }); // COMMENT OUT FOR OFFLINE TESTING
 });
 

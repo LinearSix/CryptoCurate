@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css" charset="utf-8">
     <script src="js/index.js"></script>
-    <!-- <script src="js/colors.js"></script> -->
+    <script src="js/colors.js"></script>
+    <script src="js/round.js"></script>
     <title>CryptoCurate!</title>
 </head>
 <body>
@@ -15,27 +16,26 @@
             <td><div id="logo">CryptoCurate</div></td>
             <td>
                 <div id="top">
-                    <form method="GET">
+                    <!-- start guided input -->
                         <table id="tableInput" cellspacing="0" cellpadding="0">
+                            <!-- <form method="GET">
                             <tr>
-                                <td>
-                                    <input type="text" name="searchInput" id="searchMain" list="huge_list" placeholder="Search here or select below!">
-                                    <datalist id="huge_list"></datalist>
-                                </td>
-                                <td rowspan="2">
-                                    <button type="submit" id="submitMain">Go</button>
-                                </td>
-                                <td rowspan="2">
-                                    <div id="topSpace"></div>
-                                </td>
+                               <td><input type="radio" name="limit" value="20">Top 20</td>
+                               <td><input type="radio" name="limit" value="50">Top 50</td>
+                               <td><input type="radio" name="limit" value="100">Top 100</td>
                             </tr>
+                            </form> -->
                             <tr>
-                                <td>
-                                    <select name="searchSelect" id="selectMain"></select>
-                                </td>
-                            </tr>
+                                <td><form method="GET"><input type="hidden" name="search" value="rank"><button id="user" type="submit">Top 25 | Market Cap</button></form></td>
+                                <td><form method="GET"><input type="hidden" name="search" value="volume"><button id="user" type="submit">Top 25 | Total Volume - 24hr </button></form></td>
+                                <td><form method="GET"><input type="hidden" name="search" value="volitility"><button id="user" type="submit">Top 25 | Volitility - 24hrs</button></form></td>
+                                <!-- <td><select class="searchMain" id="selectMain"></select></td> -->
+                             </tr>
+                             <tr>
+                                 <td colspan="3"><div id="searchMessage"></div></td>
+                             </tr>
                         </table>
-                    </form>
+                    <!-- end guided input -->
                 </div>
             </td>
         </tr>
