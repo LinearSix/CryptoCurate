@@ -3,6 +3,8 @@
     // Should we just have thumbs and sort options?
     // how the Hell can we sort? array.sort()?
     // 
+
+  
     
     // COIN MARKET CAP API
     // endpoint overview
@@ -13,6 +15,7 @@
     // Example API call
     // https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
     // https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?sort=market_cap&start=0&limit=10&cryptocurrency_type=tokens&convert=USD,BTC
+    //https://api.coinmarketcap.com/v2/ticker/****4-digit-ID***/
 
     // CRYPTOCURRENCYCHART.COM
     // https://www.cryptocurrencychart.com/api/coin/list

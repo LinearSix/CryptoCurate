@@ -1,7 +1,32 @@
-console.log(`coin`);
-
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('this is connected')
+    // coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
+    const coinMap = {};
+    //building of coinMap using data from Crypto Compare (in a static js file)
+    for (let key in cryptoCompData.Data) {
+        coinMap[cryptoCompData.Data[key].CoinName] = {}
+        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
+        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
+    }
+    //using topCoins from Coin Market Cap to add search ID to coinMap
+    for (let key in coinMap) {
+        coinMap[key].id = nameId[coinMap[key].name]
+    }
     
+    
+
+    console.log(coinMap)
+    
+    // const corsAnywhere = "https://cors-anywhere.herokuapp.com/"
+
+    // fetch(`${corsAnywhere}https://www.cryptocompare.com/api/data/coinlist/`)
+    // .then(response => response.json())
+    // .then( (data) => {
+    //     console.log(data)
+    //   console.log(data.Data["BTC"])
+
+    // })
+
     // TEST OBJECT FOR OFFLINE TESTING
     const testData = [
         {"name": "BitCoin", "exchange_id": "000001"},
@@ -58,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`searchSelect`));
     let searchAdd = (urlParams.get(`add`));
-    console.log(searchData);
+    //console.log(searchData);
 
     let selectExchange = document.getElementById(`selectMain`);
     // console.log(selectExchange);
@@ -77,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
     .then(response => response.json())
     .then( (data) => {
-        // console.log(data);
+        //console.log(data);
         let coinObjs = data;//testData; 
         let divScroll = document.getElementById(`middleRight`);
 
@@ -98,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // POPULATE MAIN CARD
             if (searchData) {
                 if (searchData === exchangeId) {
-                    console.log(`searchData: ${searchData}`);
-                    console.log(exchangeId);
+                    //console.log(`searchData: ${searchData}`);
+                    //console.log(exchangeId);
                     
                     cardMain.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
                     cardMain.textContent = (`${exchangeName}`);
@@ -119,8 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // POPULATE COMPARE CARDS
             if (searchAdd) {
                 if (searchAdd === exchangeId) {
-                    console.log(`searchAdd: ${searchAdd}`);
-                    console.log(exchangeId);
+                    //console.log(`searchAdd: ${searchAdd}`);
+                    //console.log(exchangeId);
                     
                     cardAdd.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
                     cardAdd.textContent = (`${exchangeName}`);
