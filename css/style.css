@@ -1,5 +1,5 @@
 body {
-    background-color: #4eca86;
+    background-color: #b7e7d6;
     align-content: center;
     align-self: auto;
     margin-left: auto;
@@ -8,17 +8,26 @@ body {
     margin-bottom: auto;
 }
 table {
-    width: auto;
+    width: 99%;
     margin-left: auto;
     margin-right: auto;
     border-width: 0px;
 }
-/* #tableInput {
+#tableInput{
+    width: 75%;
+}
+#logo{
+    color: white;
+    text-shadow: rgb(18, 54, 24) 1px 0 20px;
     width: 300px;
-    margin-left: none;
-    margin-right: 200;
-    border-width: 0px;
-} */
+    height: 70px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    background-color: #b7e7d6;
+    text-align: left;
+    padding-left: 20px;
+}
 div {
     width: auto;
     height: auto;
@@ -32,46 +41,40 @@ div {
     vertical-align: middle;
     padding: 10px;
 }
-#logo{
-    color: white;
-    text-shadow: rgb(18, 54, 24) 1px 0 20px;
-    width: 300px;
-    height: 70px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 50px;
-    font-weight: bold;
-    background-color: #b7e7d6;
-    text-align: left;
-    padding-left: 20px;
-    border-bottom: 1px solid rgb(107, 107, 107);
-}
-#middleLeft{
-    width: 299px;
-    height: 400px;
+#middleMain{
+    width: 99%;
+    height: 0px;
     background-color: #e6e9e8;
-    border-right: 1px solid rgb(107, 107, 107);
+    border-top: 1px solid rgb(107, 107, 107);
+    overflow: hidden;
 }
-#middleRight{
-    width: 880px;
-    height: 400px;
+#middleThumb{
+    width: 99%;
+    height: 500px;
     overflow: scroll;
     background-color: white;
 }
 #top{
-    float: none;
-    width: 870px;
+    float: left;
+    /* width: 100%; */
     height: 70px;
     background-color: #b7e7d6;
     align-content: left;
-    border-bottom: 1px solid rgb(107, 107, 107);
+    overflow: hidden;
 }
 #bottom{
     float: left;
-    width: 1200px;
-    height: 50px;
+    width: 99%;
+    height: 20px;
     align-content: center;
     background-color: #b7e7d6;
     border-top: 1px solid rgb(107, 107, 107);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 10px;
 }
 input#searchMain {
     color: darkgreen;
@@ -128,14 +131,15 @@ select#selectMain {
     width: 150px;
     height: 180px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 1px;
     margin: 10px;
-    box-shadow: 0px 0px 15px darkolivegreen;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 15px;
     font-weight: normal;
     color: white;
-    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    -webkit-text-stroke: 1px black;
+    text-shadow: rgb(0, 0, 0) 0px 0px 2px;
     padding: 0px;
     padding-top: 7px;
 }
@@ -169,8 +173,8 @@ select#selectMain {
     padding: 5px;
 }
 #topSpace{
-    float: none;
-    width: 250px;
+    float: left;
+    width: 95%;
     height: 10px;
     background-color: #b7e7d6;
     align-content: left;
