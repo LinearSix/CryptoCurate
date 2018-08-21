@@ -1,16 +1,26 @@
 console.log(`coin`);
-
-// const lightenColor = require('./colors.js');
-
 document.addEventListener('DOMContentLoaded', function() {
+    // coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
+    const coinMap = {};
+    //building of coinMap using data from Crypto Compare (in a static js file)
+    for (let key in cryptoCompData.Data) {
+        coinMap[cryptoCompData.Data[key].CoinName] = {}
+        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
+        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
+    }
+    //using topCoins from Coin Market Cap to add search ID to coinMap
+    for (let key in coinMap) {
+        coinMap[key].id = nameId[coinMap[key].name]
+    }
+    console.log(coinMap)
 
-    console.log(testArray);
+    //console.log(testArray);
 
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
-    console.log(searchData);
+    //console.log(searchData);
 
 
     // HANDLE QUERYSTRING 
