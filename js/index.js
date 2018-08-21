@@ -1,18 +1,27 @@
 console.log(`coin`);
-
-// const lightenColor = require('./colors.js');
-
 document.addEventListener('DOMContentLoaded', function() {
-
-    console.log(testArray);
-
+// Cors Anywhere!    
+    let cors = `https://cors-anywhere.herokuapp.com/`
+//coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
+    const coinMap = {};
+    //building of coinMap using data from Crypto Compare (in a static js file)
+    for (let key in cryptoCompData.Data) {
+        coinMap[cryptoCompData.Data[key].CoinName] = {}
+        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
+        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
+    }
+    //using topCoins from Coin Market Cap to add search ID to coinMap
+    for (let key in coinMap) {
+        coinMap[key].id = nameId[coinMap[key].name]
+    }
+   
+// below are variables that are used for getting data from query string
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
-    console.log(searchData);
 
-
+//Adding and removing from the middle main viewing area
     // HANDLE QUERYSTRING 
     let splitAdd = [];
     let splitTemp;
@@ -40,24 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(searchAdd);
     }
 
-    // PREPARE DIVS FOR POPULATION
-    let selectExchange = document.getElementById(`selectMain`);
-    // console.log(selectExchange);
-
-    let divMiddleMain = document.getElementById(`middleMain`);
-    let cardMain = document.createElement(`div`);
-        cardMain.className = (`cardMain`);
-
-    let cardAdd = document.createElement(`div`);
-        cardAdd.className = (`cardMain`);
-        
-    let divMainGuts = document.createElement(`div`);
-        divMainGuts.className = (`divMainGuts`);
-
-
-    let cors = `https://cors-anywhere.herokuapp.com/`
+//CREATING A MESSAGE TO ALERT USER OF THEIR SELECTED SEARCH TYPE
     let searchMessage;
-
     switch (searchData) {
         case `rank`:
             searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
@@ -75,11 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
             searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
             searchMessage = `Displaying Top 100 Coins by Market Cap`;
     };
-
     divMessage = document.getElementById(`searchMessage`);
     divMessage.textContent = (`${searchMessage}`);
 
-    // FETCH FROM COINMARKETCAP.COM API
+// FETCH FROM COINMARKETCAP.COM API
     fetch(`${cors}${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
@@ -87,26 +79,32 @@ document.addEventListener('DOMContentLoaded', function() {
         let coinObjs = data.data;
         let divScroll = document.getElementById(`middleThumb`);
 
-        // ITERATE THROUGH RESULTS
+// PREPARE & CREATE DIVS
+        let divMiddleMain = document.getElementById(`middleMain`);
+        let cardMain = document.createElement(`div`);
+            cardMain.className = (`cardMain`);
+
+        let cardAdd = document.createElement(`div`);
+            cardAdd.className = (`cardMain`);
+            
+        let divMainGuts = document.createElement(`div`);
+            divMainGuts.className = (`divMainGuts`);
+       
+    // ITERATE THROUGH RESULTS
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
             let exchangeName = coinObjs[coinObj].name;
             let exchangeId = coinObjs[coinObj].id;
-            let selectOption = document.createElement(`option`);
-            selectOption.textContent = (`${exchangeName}`);
-            selectOption.value = (`${exchangeId}`);
-            // selectExchange.appendChild(selectOption);
-
-            // CONTINUE DECLARING ATTRIBUTE VARIABLES FOR CARDS
             let exchangeSymbol = coinObjs[coinObj].symbol;
             let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
-            let maxSupply = coinObjs[coinObj].max_supply;
             let circSupply = coinObjs[coinObj].circulating_supply
-            let releaseYear;
             let exchangeRank = coinObjs[coinObj].rank;
             let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
+            let releaseYear;
+            let logo;
+            let maxSupply = coinObjs[coinObj].max_supply;
 
             // POPULATE MAIN CARD
             if (searchAdd) {
@@ -114,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // console.log(`searchData: ${searchData}`);
                     // console.log(exchangeId);
 
-                    
                     cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                     cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
                     divMiddleMain.appendChild(cardMain);
@@ -130,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p><form method="GET">
                     <input type="hidden" name="searchInput" value="">
                     <input type="hidden" name="searchSelect" value="${searchData}">
-                    <input type="hidden" name="add" value="${coinObjs[coinObj].exchange_id}">
+                    <input type="hidden" name="add" value="${exchangeId}">
                     <button type="submit">REMOVE</button></form></p>
                     `);
                     cardMain.appendChild(divMainGuts);
@@ -138,7 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
 
-        // FUNCTION TO ELIMINATE ADDED CARDS FROM THUMBNAILS
+    // FUNCTION TO ELIMINATE ADDED CARDS FROM THUMBNAILS AREA
+        //*****  Consider Removal  *******************
         let difference = function(arrayOne, arrayTwo) {
             // Place your solution here
             let arrayOneSample;
@@ -158,7 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             return arrayOne;
         };
-
+        // ***************************
+    
+    //Creating the thumbnail
         for (let coinObj in difference(coinObjs, splitAdd)) {
             let exchangeName = coinObjs[coinObj].name;
             let exchangeId = coinObjs[coinObj].id;
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 divScroll.appendChild(divThumb);
             }
         };
-    }); // COMMENT OUT FOR OFFLINE TESTING
+    });
 });
 
 // python -m SimpleHTTPServer
