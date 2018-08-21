@@ -1,5 +1,5 @@
 body {
-    background-color: #4eca86;
+    background-color: #b7e7d6;
     align-content: center;
     align-self: auto;
     margin-left: auto;
@@ -8,17 +8,40 @@ body {
     margin-bottom: auto;
 }
 table {
-    width: auto;
+    width: 99%;
     margin-left: auto;
     margin-right: auto;
     border-width: 0px;
 }
-/* #tableInput {
+#tableInput{
+    width: 75%;
+}
+#logo{
+    color: white;
+    text-shadow: rgb(18, 54, 24) 1px 0 20px;
     width: 300px;
-    margin-left: none;
-    margin-right: 200;
-    border-width: 0px;
-} */
+    height: 70px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    background-color: #b7e7d6;
+    text-align: left;
+    padding-left: 20px;
+}
+#searchMessage{
+    color: #3b9765;
+    text-shadow: rgb(255, 255, 255) 0px 0px 1px;
+    width: 100%;
+    /* height: 70px; */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #b7e7d6;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+}
 div {
     width: auto;
     height: auto;
@@ -32,46 +55,40 @@ div {
     vertical-align: middle;
     padding: 10px;
 }
-#logo{
-    color: white;
-    text-shadow: rgb(18, 54, 24) 1px 0 20px;
-    width: 300px;
-    height: 70px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 50px;
-    font-weight: bold;
-    background-color: #b7e7d6;
-    text-align: left;
-    padding-left: 20px;
-    border-bottom: 1px solid rgb(107, 107, 107);
-}
-#middleLeft{
-    width: 299px;
-    height: 400px;
+#middleMain{
+    width: 99%;
+    /* height: 200px; */
     background-color: #e6e9e8;
-    border-right: 1px solid rgb(107, 107, 107);
+    border-top: 1px solid rgb(107, 107, 107);
+    overflow: hidden;
 }
-#middleRight{
-    width: 880px;
-    height: 400px;
+#middleThumb{
+    width: 99%;
+    height: 500px;
     overflow: scroll;
     background-color: white;
 }
 #top{
-    float: none;
-    width: 870px;
+    float: left;
+    /* width: 100%; */
     height: 70px;
     background-color: #b7e7d6;
     align-content: left;
-    border-bottom: 1px solid rgb(107, 107, 107);
+    overflow: hidden;
 }
 #bottom{
     float: left;
-    width: 1200px;
-    height: 50px;
+    width: 99%;
+    height: 20px;
     align-content: center;
     background-color: #b7e7d6;
     border-top: 1px solid rgb(107, 107, 107);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin: 10px;
 }
 input#searchMain {
     color: darkgreen;
@@ -91,6 +108,25 @@ select#selectMain {
     background-color: whitesmoke;
     padding-left: -15px;
  }
+ button#user{
+    width: 200px;
+    height: 30px;
+    color: white;
+    background-color: #4eca86;
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+ }
+ button#user:hover {
+    background-color: aquamarine;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 1px 1px 2px;
+ }
  button#submitMain{
     width: 50px;
     height: 60px;
@@ -109,39 +145,40 @@ select#selectMain {
     color: rgb(0, 0, 0);
 }
 .cardMain{
-    width: 260px;
-    height: 360px;
+    width: 200px;
+    height: 250px;
     border: 2px solid black;
     border-radius: 5px;
     background-color: rgb(224, 219, 218);
-    margin-left: 8px;
-    margin-top: 8px;
-    box-shadow: 0px 0px 15px darkolivegreen;
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     color: white;
-    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
     padding: 0px;
-    padding-top: 10px;
+    padding-top: 6px;
 }
 .divThumb{
     width: 150px;
-    height: 180px;
+    height: 160px;
     border: 1px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    box-shadow: 0px 0px 15px darkolivegreen;
+    border-radius: 1px;
+    margin: 6px;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: normal;
     color: white;
-    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
     padding: 0px;
-    padding-top: 7px;
+    padding-top: 2px;
 }
 .divMainGuts{
-    width: 239px;
-    height: 305px;
+    width: 176px;
+    height: 199px;
+    border: 1px solid black;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin: 5px;
@@ -151,15 +188,16 @@ select#selectMain {
     color: black;
     text-shadow: rgb(255, 255, 255) 0px 0 0px;
     text-align: left;
-    padding: 5px;
+    padding: 6px;
     padding-top: 10px;
 }
 .divThumbGuts{
-    width: 130px;
-    height: 142px;
+    width: 132px;
+    height: 126px;
+    border: 1px solid black;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin: 5px;
+    margin: 3px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10px;
     font-weight: normal;
@@ -169,8 +207,8 @@ select#selectMain {
     padding: 5px;
 }
 #topSpace{
-    float: none;
-    width: 250px;
+    float: left;
+    width: 95%;
     height: 10px;
     background-color: #b7e7d6;
     align-content: left;

@@ -1,94 +1,50 @@
+console.log(`coin`);
+
+// const lightenColor = require('./colors.js');
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('this is connected')
-    // coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
-    const coinMap = {};
-    //building of coinMap using data from Crypto Compare (in a static js file)
-    for (let key in cryptoCompData.Data) {
-        coinMap[cryptoCompData.Data[key].CoinName] = {}
-        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
-        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
-    }
-    //using topCoins from Coin Market Cap to add search ID to coinMap
-    for (let key in coinMap) {
-        coinMap[key].id = nameId[coinMap[key].name]
-    }
-    
-    
 
-    console.log(coinMap)
-    
-    // const corsAnywhere = "https://cors-anywhere.herokuapp.com/"
-
-    // fetch(`${corsAnywhere}https://www.cryptocompare.com/api/data/coinlist/`)
-    // .then(response => response.json())
-    // .then( (data) => {
-    //     console.log(data)
-    //   console.log(data.Data["BTC"])
-
-    // })
-
-    // TEST OBJECT FOR OFFLINE TESTING
-    const testData = [
-        {"name": "BitCoin", "exchange_id": "000001"},
-        {"name": "Binance", "exchange_id": "000002"},
-        {"name": "GDAX", "exchange_id": "000003"},
-        {"name": "Bitstamp Ltd.", "exchange_id": "000004"},
-        {"name": "OKCoin CNY", "exchange_id": "000005"},
-        {"name": "Bittrex", "exchange_id": "000006"},
-        {"name": "POLONIEX", "exchange_id": "000007"},
-        {"name": "Bitfinex", "exchange_id": "000008"},
-        {"name": "Kraken", "exchange_id": "000009"},
-        {"name": "Huobi Pro", "exchange_id": "000010"},
-        {"name": "BitCorn", "exchange_id": "000011"},
-        {"name": "Beonce", "exchange_id": "000012"},
-        {"name": "GODAX", "exchange_id": "000013"},
-        {"name": "Bittramp Ltd.", "exchange_id": "000014"},
-        {"name": "OKCon CNY", "exchange_id": "000015"},
-        {"name": "T-rex", "exchange_id": "000016"},
-        {"name": "COLONIEX", "exchange_id": "000017"},
-        {"name": "Bitfinger", "exchange_id": "000018"},
-        {"name": "Krooked", "exchange_id": "000019"},
-        {"name": "Hubby Pro", "exchange_id": "000020"},
-    ]
-
-    // ATTRIBUTES TO LOOK FOR
-    // market cap
-    // coins in circulation
-    // year of origin
-    // anything about the team
-    // anything about the consensus method like “proof of work“
-    // price
-    // % price gain or price loss over given time
-    // anything about philosophy or purpose of coin would be fantastic- basically what is the value prop.
-
-    // COINAPI.IO
-    // https://docs.coinapi.io/#introduction
-    // X-CoinAPI-Key: 345FCF08-5D2C-432A-8FA1-7B4972E7FD53
-    // FETCH URL: https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53
-
-    // data_end:"2018-08-18"
-    // data_orderbook_end:"2018-08-18T15:27:54.8920000Z"
-    // data_orderbook_start:"2017-12-18T21:50:58.3910192Z"
-    // data_quote_end:"2018-08-18T15:27:54.8920000Z"
-    // data_quote_start:"2017-12-18T21:50:58.3910192Z"
-    // data_start:"2017-07-14"
-    // data_symbols_count:394
-    // data_trade_count:460919764
-    // data_trade_end:"2018-08-18T15:27:39.8240000Z"
-    // data_trade_start:"2017-07-14T04:00:00.3760000Z"
-    // exchange_id:"BINANCE"
-    // name:"Binance"
-    // website:"https://www.binance.com/"
+    console.log(testArray);
 
     let urlParams = new URLSearchParams(window.location.search);
-    let searchData = (urlParams.get(`searchSelect`));
+    let searchData = (urlParams.get(`search`));
     let searchAdd = (urlParams.get(`add`));
-    //console.log(searchData);
+    let searchRemove = (urlParams.get(`remove`));
+    console.log(searchData);
 
+
+    // HANDLE QUERYSTRING 
+    let splitAdd = [];
+    let splitTemp;
+    if (searchAdd && searchRemove) {
+        splitTemp = [];
+        splitTemp = searchAdd.split(",");
+        for (item in splitTemp) {
+            if (splitTemp[item] !== "null" && splitTemp[item] !== searchRemove) {
+                splitAdd.push(splitTemp[item]);
+            };
+        };
+        searchAdd = splitAdd.join();
+        console.log(splitAdd);
+        console.log(searchAdd);
+    } else if (searchAdd) {
+        splitTemp = [];
+        splitTemp = searchAdd.split(",");
+        for (item in splitTemp) {
+            if (splitTemp[item] !== "null") {
+                splitAdd.push(splitTemp[item]);
+            };
+        };
+        searchAdd = splitAdd.join();
+        console.log(splitAdd);
+        console.log(searchAdd);
+    }
+
+    // PREPARE DIVS FOR POPULATION
     let selectExchange = document.getElementById(`selectMain`);
     // console.log(selectExchange);
 
-    let divMiddleLeft = document.getElementById(`middleLeft`);
+    let divMiddleMain = document.getElementById(`middleMain`);
     let cardMain = document.createElement(`div`);
         cardMain.className = (`cardMain`);
 
@@ -97,107 +53,163 @@ document.addEventListener('DOMContentLoaded', function() {
         
     let divMainGuts = document.createElement(`div`);
         divMainGuts.className = (`divMainGuts`);
-    
-    // COMMENT OUT NEXT FOUR LINES FOR OFFLINE TESTING
-    fetch("https://cors-anywhere.herokuapp.com/https://rest.coinapi.io/v1/exchanges?apikey=345FCF08-5D2C-432A-8FA1-7B4972E7FD53")
-    .then(response => response.json())
-    .then( (data) => {
-        //console.log(data);
-        let coinObjs = data;//testData; 
-        let divScroll = document.getElementById(`middleRight`);
 
+
+    let cors = `https://cors-anywhere.herokuapp.com/`
+    let searchMessage;
+
+    switch (searchData) {
+        case `rank`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
+            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            break;
+        case `volume`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=volume_24h`;
+            searchMessage = `Displaying Top 25 Coins by Volume - 24 Hours`;
+            break;
+        case `volitility`:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=percent_change_24h`;
+            searchMessage = `Displaying Top 25 Coins by Volitility - 24 hours`;
+            break;
+        default:
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
+            searchMessage = `Displaying Top 100 Coins by Market Cap`;
+    };
+
+    divMessage = document.getElementById(`searchMessage`);
+    divMessage.textContent = (`${searchMessage}`);
+
+    // FETCH FROM COINMARKETCAP.COM API
+    fetch(`${cors}${searchMain}`)
+        .then(response => response.json())
+        .then( (data) => {
+        console.log(data);
+        let coinObjs = data.data;
+        let divScroll = document.getElementById(`middleThumb`);
+
+        // ITERATE THROUGH RESULTS
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
-            // console.log(coinObjs[coinObj]);
             let exchangeName = coinObjs[coinObj].name;
-            let exchangeId = coinObjs[coinObj].exchange_id;
-            // console.log(exchangeName)
+            let exchangeId = coinObjs[coinObj].id;
             let selectOption = document.createElement(`option`);
             selectOption.textContent = (`${exchangeName}`);
             selectOption.value = (`${exchangeId}`);
-            selectExchange.appendChild(selectOption);
-            if (exchangeId === searchData) {
-                selectOption.selected = (true);
-            };
+            // selectExchange.appendChild(selectOption);
+
+            // CONTINUE DECLARING ATTRIBUTE VARIABLES FOR CARDS
+            let exchangeSymbol = coinObjs[coinObj].symbol;
+            let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
+            let maxSupply = coinObjs[coinObj].max_supply;
+            let circSupply = coinObjs[coinObj].circulating_supply
+            let releaseYear;
+            let exchangeRank = coinObjs[coinObj].rank;
+            let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
+            let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
+            let exchangePrice = coinObjs[coinObj].quotes.USD.price;
 
             // POPULATE MAIN CARD
-            if (searchData) {
-                if (searchData === exchangeId) {
-                    //console.log(`searchData: ${searchData}`);
-                    //console.log(exchangeId);
+            if (searchAdd) {
+                if (Number(searchAdd) === Number(exchangeId)) {
+                    // console.log(`searchData: ${searchData}`);
+                    // console.log(exchangeId);
+
                     
-                    cardMain.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
-                    cardMain.textContent = (`${exchangeName}`);
-                    divMiddleLeft.appendChild(cardMain);
+                    cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                    cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                    divMiddleMain.appendChild(cardMain);
 
                     divMainGuts.innerHTML = (`
-                    Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-                    <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-                    <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-                    <p>ID:${coinObjs[coinObj].exchange_id}</p>
-                    <p>${coinObjs[coinObj].website}</p>
+                    Rank: ${exchangeRank}</p>
+                    <p>24hr %Change: ${exchangePct24}</p>
+                    <p>Vol: ${exchangeVol24}</p>
+                    <p>Price(USD): $${round(exchangePrice, 2)}</p>
+                    <p>Mkt Cap: ${marketCap}</p>
+                    <p>Max Supply: ${maxSupply}</p>
+                    <p>Circulating Supply: ${circSupply}</p>
+                    <p><form method="GET">
+                    <input type="hidden" name="searchInput" value="">
+                    <input type="hidden" name="searchSelect" value="${searchData}">
+                    <input type="hidden" name="add" value="${coinObjs[coinObj].exchange_id}">
+                    <button type="submit">REMOVE</button></form></p>
                     `);
                     cardMain.appendChild(divMainGuts);
                 };
             };
+        };
 
-            // POPULATE COMPARE CARDS
-            if (searchAdd) {
-                if (searchAdd === exchangeId) {
-                    //console.log(`searchAdd: ${searchAdd}`);
-                    //console.log(exchangeId);
-                    
-                    cardAdd.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
-                    cardAdd.textContent = (`${exchangeName}`);
-                    divMiddleLeft.appendChild(cardAdd);
-
-                    divMainGuts.innerHTML = (`
-                    Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-                    <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-                    <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-                    <p>ID:${coinObjs[coinObj].exchange_id}</p>
-                    <p>${coinObjs[coinObj].website}</p>
-                    `);
-                    cardAdd.appendChild(divMainGuts);
+        // FUNCTION TO ELIMINATE ADDED CARDS FROM THUMBNAILS
+        let difference = function(arrayOne, arrayTwo) {
+            // Place your solution here
+            let arrayOneSample;
+            let arrayTwoSample;
+            for (let i = 0; i < arrayOne.length; i++) {
+                arrayOneSample = arrayOne[i];
+                //console.log(arrayOneSample);
+                for (j = 0; j < arrayTwo.length; j++) {
+                    arrayTwoSample = arrayTwo[j];
+                    //console.log(arrayTwoSample);
+                    if (arrayOneSample === arrayTwoSample) {
+                        //console.log(arrayOneSample);
+                        arrayOne.splice(i, 1);
+                        i = i-1;
+                    };
                 };
             };
+            return arrayOne;
+        };
 
-            // POPULATE THUMBNAILS
-            let divThumb = document.createElement(`div`);
-            divThumb.className = (`divThumb`);
-            divThumb.textContent = (`${exchangeName}`);
-            let divThumbGuts = document.createElement(`div`);
-            divThumbGuts.className = (`divThumbGuts`);
-            divThumbGuts.innerHTML = (`
-            Origin: ${coinObjs[coinObj].data_start.split("T")[1]}</p>
-            <p>Start:</br>${coinObjs[coinObj].data_trade_start}</p>
-            <p>End:</br>${coinObjs[coinObj].data_trade_end}</p>
-            <p>${coinObjs[coinObj].website}</p>
-            <p><form method="GET">
-            <input type="hidden" name="searchInput" value="">
-            <input type="hidden" name="searchSelect" value="${searchData}">
-            <input type="hidden" name="add" value="${coinObjs[coinObj].exchange_id}">
-            <button type="submit">ADD</button></form></p>
-            `)
-            divThumb.style.background = (`#${intToRGB(hashCode(exchangeName))}`);
-            divThumb.appendChild(divThumbGuts);
-            divScroll.appendChild(divThumb);
-            
-            // COLOR GENERATOR
-            function hashCode(str) { // java String#hashCode
-                let hash = 0;
-                for (let i = 0; i < str.length; i++) {
-                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-                }
-                return hash;
-            } 
-            function intToRGB(i){
-                let c = (i & 0x00FFFFFF)
-                .toString(16)
-                .toUpperCase();
-                
-                return "00000".substring(0, 6 - c.length) + c;
-            };
+        for (let coinObj in difference(coinObjs, splitAdd)) {
+            let exchangeName = coinObjs[coinObj].name;
+            let exchangeId = coinObjs[coinObj].id;
+            let exchangeSymbol = coinObjs[coinObj].symbol;
+            let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
+            let maxSupply = coinObjs[coinObj].max_supply;
+            let circSupply = coinObjs[coinObj].circulating_supply
+            let releaseYear;
+            let exchangeRank = coinObjs[coinObj].rank;
+            let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
+            let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
+            let exchangePrice = coinObjs[coinObj].quotes.USD.price;
+            if (searchAdd === null) {
+                let divThumb = document.createElement(`div`);
+                divThumb.className = (`divThumb`);
+                divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                let divThumbGuts = document.createElement(`div`);
+                divThumbGuts.className = (`divThumbGuts`);
+                divThumbGuts.innerHTML = (`
+                Rank: ${exchangeRank}</p>
+                <p>24hr %Change: ${exchangePct24}</p>
+                <p>Vol: </br>${exchangeVol24}</p>
+                <p>Price(USD): $${round(exchangePrice, 2)}</p>
+                <p><form method="GET">
+                <input type="hidden" name="search" value="${searchData}">
+                <input type="hidden" name="add" value="${exchangeId}">
+                <button type="submit">ADD</button></form></p>
+                `)
+                divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                divThumb.appendChild(divThumbGuts);
+                divScroll.appendChild(divThumb);
+            } else {
+                let divThumb = document.createElement(`div`);
+                divThumb.className = (`divThumb`);
+                divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                let divThumbGuts = document.createElement(`div`);
+                divThumbGuts.className = (`divThumbGuts`);
+                divThumbGuts.innerHTML = (`
+                Rank: ${exchangeRank}</p>
+                <p>24hr % change: ${exchangePct24}</p>
+                <p>Vol: </br>${exchangeVol24}</p>
+                <p>Price(USD): $${round(exchangePrice, 2)}</p>
+                <p><form method="GET">
+                <input type="hidden" name="search" value="${searchData}">
+                <input type="hidden" name="add" value="${searchAdd},${exchangeId}">
+                <button type="submit">ADD</button></form></p>
+                `)
+                divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                divThumb.appendChild(divThumbGuts);
+                divScroll.appendChild(divThumb);
+            }
         };
     }); // COMMENT OUT FOR OFFLINE TESTING
 });

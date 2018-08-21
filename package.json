@@ -1,0 +1,19 @@
+{
+  "name": "cryptocurate",
+  "version": "1.0.0",
+  "description": "A cryptocurrency comparison web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinearSix/CryptoCurate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinearSix/CryptoCurate/issues"
+  },
+  "homepage": "https://github.com/LinearSix/CryptoCurate#readme"
+}
