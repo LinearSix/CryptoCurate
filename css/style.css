@@ -13,10 +13,10 @@ table {
     margin-right: auto;
     border-width: 0px;
 }
-#tableInput{
+div#tableInput{
     width: 75%;
 }
-#logo{
+div#logo{
     color: white;
     text-shadow: rgb(18, 54, 24) 1px 0 20px;
     width: 300px;
@@ -30,7 +30,7 @@ table {
 }
 #searchMessage{
     color: #3b9765;
-    text-shadow: rgb(255, 255, 255) 0px 0px 1px;
+    text-shadow: rgb(255, 255, 255) 0px 0px 3px;
     width: 100%;
     /* height: 70px; */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -40,7 +40,7 @@ table {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 15px;
+    padding-top: 7px;
 }
 div {
     width: auto;
@@ -55,20 +55,20 @@ div {
     vertical-align: middle;
     padding: 10px;
 }
-#middleMain{
+div#middleMain{
     width: 99%;
     /* height: 200px; */
     background-color: #e6e9e8;
     border-top: 1px solid rgb(107, 107, 107);
     overflow: hidden;
 }
-#middleThumb{
+div#middleThumb{
     width: 99%;
     height: 500px;
     overflow: scroll;
     background-color: white;
 }
-#top{
+div#top{
     float: left;
     /* width: 100%; */
     height: 70px;
@@ -76,7 +76,7 @@ div {
     align-content: left;
     overflow: hidden;
 }
-#bottom{
+div#bottom{
     float: left;
     width: 99%;
     height: 20px;
@@ -98,19 +98,11 @@ input#searchMain {
     background-color: whitesmoke;
     border: 0px;
     padding-left: 15px;
-    margin-top: 5px;
- }
-select#selectMain {
-    color: darkgreen;
-    width: 300px;
-    height: 30px;
-    font-size: 18px;
-    background-color: whitesmoke;
-    padding-left: -15px;
+    margin-top: 1px;
  }
  button#user{
     width: 200px;
-    height: 30px;
+    height: 25px;
     color: white;
     background-color: #4eca86;
     border: 1px solid aquamarine;
@@ -127,30 +119,14 @@ select#selectMain {
     color: rgb(0, 0, 0);
     text-shadow: rgb(255, 255, 255) 1px 1px 2px;
  }
- button#submitMain{
-    width: 50px;
-    height: 60px;
-    color: white;
-    background-color: #4eca86;
-    border: 1px solid aquamarine;
-    border-radius: 10px;
-    margin-left: 10px;
-    margin-top: 5px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 20px;
-    box-shadow: 0 0px 10px 0 rgb(73, 73, 73);
- }
- button#submitMain:hover {
-    background-color: aquamarine;
-    color: rgb(0, 0, 0);
-}
-.cardMain{
+div.cardMain{
     width: 200px;
     height: 250px;
     border: 2px solid black;
     border-radius: 5px;
     background-color: rgb(224, 219, 218);
-    margin-left: 5px;
+    margin-left: 7px;
+    margin-right: 7px;
     margin-top: 5px;
     box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -219,4 +195,42 @@ h4{
     size: 15px;
     font-weight: normal;
     text-shadow: rgb(8, 24, 11) 1px 0 10px;
+}
+button.add{
+    width: 60px;
+    height: 20px;
+    color: white;
+    background-color: #4eca86;
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+}
+button.add:hover {
+    background-color: aquamarine;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 1px 1px 2px;
+}
+button.remove{
+    width: 80px;
+    height: 20px;
+    color: white;
+    background-color: #4eca86;
+    border: 1px solid aquamarine;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+}
+button.remove:hover {
+    background-color: aquamarine;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 1px 1px 2px;
 }

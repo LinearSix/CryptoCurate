@@ -22,19 +22,19 @@
                 <div id="top">
                     <!-- start guided input -->
                         <table id="tableInput" cellspacing="0" cellpadding="0">
-                            <!-- <form method="GET">
+                            <form method="GET">
                             <tr>
-                               <td><input type="radio" name="limit" value="20">Top 20</td>
-                               <td><input type="radio" name="limit" value="50">Top 50</td>
-                               <td><input type="radio" name="limit" value="100">Top 100</td>
+                                <td colspan="3"><input type="radio" id="25" name="limit" value="25">Top 25 &nbsp;
+                                <input type="radio" id="50" name="limit" value="50">Top 50 &nbsp;
+                                <input type="radio" id="100" name="limit" value="100">Top 100</td>
                             </tr>
-                            </form> -->
                             <tr>
-                                <td><form method="GET"><input type="hidden" name="search" value="rank"><button id="user" type="submit">Top 25 | Market Cap</button></form></td>
-                                <td><form method="GET"><input type="hidden" name="search" value="volume"><button id="user" type="submit">Top 25 | Trade Volume - 24hr </button></form></td>
-                                <td><form method="GET"><input type="hidden" name="search" value="volitility"><button id="user" type="submit">Top 25 | Volitility - 24hrs</button></form></td>
+                                <td><button id="user" type="submit" name="search" value="rank">Market Cap</button></td>
+                                <td><button id="user" type="submit" name="search" value="volume">Trade Volume - 24hr </button></td>
+                                <td><button id="user" type="submit" name="search" value="volitility">Volitility - 24hrs</button></td>
                                 <!-- <td><select class="searchMain" id="selectMain"></select></td> -->
                              </tr>
+                             </form>
                              <tr>
                                  <td colspan="3"><div id="searchMessage"></div></td>
                              </tr>
