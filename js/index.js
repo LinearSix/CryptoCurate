@@ -122,7 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let price = coinObjs[coinObj].quotes.USD.price;
         let logo = (coinMapArray.includes(coinName) ? coinMap[coinName].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
         let year = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].year : "")
-        let maxSupply = coinObjs[coinObj].max_supply; 
+        let maxSupply = coinObjs[coinObj].max_supply;
+        console.log(maxSupply);
         let description = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].description : "")
         let proofType = (coinMapArray.includes(coinName) ? coinMap[coinName].proofType :"");
         let algorithm = (coinMapArray.includes(coinName) ? coinMap[coinName].algorithm :"");
@@ -144,30 +145,44 @@ document.addEventListener('DOMContentLoaded', function() {
             let limitData;
             if (searchAdd) {
                 addData = `<input type="hidden" name="add" value="${searchAdd}"></input>`;
+            } else {
+                addData = ``;
             };
             if (searchData) {
                 persistData = `<input type="hidden" name="search" value="${searchData}"></input>`;
+            } else {
+                persistData = ``;
             };
             if (searchLimit) {
                 limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+            } else {
+                limitData = ``;
             };
-            cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(coinName)),20)}`);
-            cardMain.textContent = (`${coinName} | ${ticker}`);
+            cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
+                cardMain.innerHTML = (`
+                <form method="GET"><nobr>${coinName}<button class="remove" type="submit">X</button></nobr>
+                ${limitData}
+                ${persistData}
+                ${addData}
+                <input type="hidden" name="remove" value="${coinId}"></form>
+                `);
             divMainGuts.innerHTML = (`
-            Rank: ${rank}</p>
-            <p>24hr %Change: ${exPerc24h}</p>
-            <p>Vol: ${exVol24h}</p>
-            <p>Price(USD): $${round(price, 6)}</p>
-            <p>Mkt Cap: ${marketCap}</p>
-            <p>Max Supply: </p>
-            <p>Circulating Supply: ${circSupply}</p>
-            <p><form method="GET">
-            ${limitData}
-            ${persistData}
-            ${addData}
-            <input type="hidden" name="remove" value="${coinId}">
-            <button class="remove" type="submit">REMOVE</button></form></p>
+            <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" align="left">
+            <h3>${ticker}</h3><br>
+            <h5>Since ${year}</h5><br>
+            <p id="price">Price <stong>$${round(price, 6)}</stong></p>
+            #${rank} in Market Cap<br>
+            ($${marketCap})<br>
+            %Change 24h ${exPerc24h}<br>
+            Exchange Vol 24h ${exVol24h}<br>
+            Max Supply ${maxSupply}<br>
+            Circulating Supply ${circSupply}<br>
+            Consensus Type ${proofType}<br>
+            Hash Algorithm ${algorithm}<br>
+            Founder(s) ${founder}<br>
+            <i>${description}</i>
             `);
+            divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
             cardMain.appendChild(divMainGuts);
             divMiddleMain.appendChild(cardMain);
         } else {
