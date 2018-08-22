@@ -1,5 +1,5 @@
-console.log(`coin`);
 document.addEventListener('DOMContentLoaded', function() {
+    console.log(`we are connected`);
 // Cors Anywhere!    
     let cors = `https://cors-anywhere.herokuapp.com/`
 //coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
@@ -7,19 +7,54 @@ document.addEventListener('DOMContentLoaded', function() {
     //building of coinMap using data from Crypto Compare (in a static js file)
     for (let key in cryptoCompData.Data) {
         coinMap[cryptoCompData.Data[key].CoinName] = {}
-        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
-        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
-    }
+        coinMap[cryptoCompData.Data[key].CoinName].name = (cryptoCompData.Data[key].CoinName || "")
+        coinMap[cryptoCompData.Data[key].CoinName].ticker = (cryptoCompData.Data[key].Symbol || "")
+        coinMap[cryptoCompData.Data[key].CoinName].logo = (`https://www.cryptocompare.com${cryptoCompData.Data[key].ImageUrl}` || "")
+        coinMap[cryptoCompData.Data[key].CoinName].algorithm = (cryptoCompData.Data[key].Algorithm || "")
+        coinMap[cryptoCompData.Data[key].CoinName].proofType = (cryptoCompData.Data[key].ProofType || "")
+    };
+    let cryptoNonFinancialArray = [];
+    for (let coin in cryptoNonFinancial) {
+        cryptoNonFinancialArray.push(coin);
+    };
+    console.log(cryptoNonFinancialArray);
     //using topCoins from Coin Market Cap to add search ID to coinMap
     for (let key in coinMap) {
         coinMap[key].id = nameId[coinMap[key].name]
     }
-   
+    //manually added Tron because it was being bi**h
+    coinMap.TRON= {}
+    coinMap.TRON.logo = `https://cdn.freebiesupply.com/logos/large/2x/tron-logo-png-transparent.png`
+    // console.log(coinMap)
 // below are variables that are used for getting data from query string
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
+    let searchLimit = (urlParams.get(`limit`));
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
+
+//Adding and removing from the middle main viewing area
+    // HANDLE QUERYSTRING 
+    let limit;
+    if (searchLimit) {
+        switch (searchLimit) {
+            case `25`:
+                limit = document.getElementById(`25`);
+                limit.checked = true;
+                break;
+            case `50`:
+                limit = document.getElementById(`50`);
+                limit.checked = true;
+                break;
+            case `100`:
+                limit = document.getElementById(`100`);
+                limit.checked = true;
+                break;
+            default:
+                limit = document.getElementById(`25`);
+                limit.checked = true;
+        };
+    };
     let splitAdd = [];
     let splitTemp;
     if (searchAdd && searchRemove) {
@@ -31,8 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
         searchAdd = splitAdd.join();
-        console.log(splitAdd);
-        console.log(searchAdd);
     } else if (searchAdd) {
         splitTemp = [];
         splitTemp = searchAdd.split(",");
@@ -42,50 +75,49 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
         searchAdd = splitAdd.join();
-        console.log(splitAdd);
-        console.log(searchAdd);
     };
-    
 
 //CREATING A MESSAGE TO ALERT USER OF THEIR SELECTED SEARCH TYPE
     let searchMessage;
     switch (searchData) {
         case `rank`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
-            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=rank`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Market Cap`;
             break;
         case `volume`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=volume_24h`;
-            searchMessage = `Displaying Top 25 Coins by Volume - 24 Hours`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=volume_24h`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Trade Volume - 24 Hours`;
             break;
         case `volitility`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=percent_change_24h`;
-            searchMessage = `Displaying Top 25 Coins by Volitility - 24 hours`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=percent_change_24h`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Volitility - 24 hours`;
             break;
         default:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
-            searchMessage = `Displaying Top 100 Coins by Market Cap`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
+            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            limit = document.getElementById(`25`);
+                limit.checked = true;
     };
     divMessage = document.getElementById(`searchMessage`);
     divMessage.textContent = (`${searchMessage}`);
 
-// FETCH FROM COINMARKETCAP.COM API
+// FETCH 
+//FROM COINMARKETCAP.COM API
     fetch(`${cors}${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
-        console.log(data);
+        // console.log(data);
         let coinObjs = data.data;
         let divScroll = document.getElementById(`middleThumb`);
 
 // PREPARE & CREATE DIVS
         
-
-        
        
     // ITERATE THROUGH RESULTS
+        let buy = 'https://poloniex.com/';
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
-            let exchangeName = coinObjs[coinObj].name;
+            let exchangeName = coinObjs[coinObj].name; 
             let exchangeId = coinObjs[coinObj].id;
             let exchangeSymbol = coinObjs[coinObj].symbol;
             let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
@@ -94,11 +126,29 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
-            let releaseYear;
-            let logo;
-            let maxSupply = coinObjs[coinObj].max_supply;
-
+    //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123 
+            if (cryptoNonFinancialArray.includes(`${exchangeName}`)) {
+                let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'');
+                    // console.log(logos);
+                let releaseYear = cryptoNonFinancial[`${exchangeName}`].year;
+                    // console.log(releaseYear)
+                let maxSupply = coinObjs[coinObj].max_supply;
+                    // console.log(maxSupply)
+                let description = cryptoNonFinancial[`${exchangeName}`].description;
+                    // console.log(description)
+                let circulatingSupply = coinObjs[coinObj].circulating_supply;
+                    // console.log(circulatingSupply)
+                let proofType = coinMap[exchangeName].proofType;
+                    // console.log(proofType)
+                let algorithm = coinMap[exchangeName].algorithm;
+                    // console.log(algorithm)
+                let founder = cryptoNonFinancial[`${exchangeName}`].founder;
+                    // console.log(founder)
+            };
             
+            
+        
+        
             let divMiddleMain = document.getElementById(`middleMain`);
             let cardMain = document.createElement(`div`);
                 cardMain.className = (`cardMain`);
@@ -113,11 +163,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (splitAdd.includes(`${exchangeId}`)) {
                 let addData;
                 let persistData;
+                let limitData;
                 if (searchAdd) {
                     addData = `<input type="hidden" name="add" value="${searchAdd}"></input>`;
                 };
                 if (searchData) {
                     persistData = `<input type="hidden" name="search" value="${searchData}"></input>`;
+                };
+                if (searchLimit) {
+                    limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
                 };
                 cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
@@ -125,48 +179,64 @@ document.addEventListener('DOMContentLoaded', function() {
                 Rank: ${exchangeRank}</p>
                 <p>24hr %Change: ${exchangePct24}</p>
                 <p>Vol: ${exchangeVol24}</p>
-                <p>Price(USD): $${round(exchangePrice, 4)}</p>
+                <p>Price(USD): $${round(exchangePrice, 6)}</p>
                 <p>Mkt Cap: ${marketCap}</p>
-                <p>Max Supply: ${maxSupply}</p>
+                <p>Max Supply: </p>
                 <p>Circulating Supply: ${circSupply}</p>
                 <p><form method="GET">
+                ${limitData}
                 ${persistData}
                 ${addData}
                 <input type="hidden" name="remove" value="${exchangeId}">
-                <button type="submit">REMOVE</button></form></p>
+                <button class="remove" type="submit">REMOVE</button></form></p>
                 `);
                 cardMain.appendChild(divMainGuts);
                 divMiddleMain.appendChild(cardMain);
             } else {
                 // make a thumbnail
+                let coinLogo = `https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png`;
                 let addData;
                 if (searchAdd) {
                     addData = `<input type="hidden" name="add" value="${searchAdd},${exchangeId}"></input>`;
                 } else {
                     addData = `<input type="hidden" name="add" value="${exchangeId}"></input>`;
                 };
+                let limitData;
+                if (searchLimit) {
+                    limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+                } else {
+                    limitData = ``;
+                };
+                // try making thumb a big button
+                // #################################
+                let thumbForm = document.createElement(`form`);
+                    thumbForm.method = (`GET`);
+                let thumbButton = document.createElement(`button`);
+                    thumbButton.type = (`submit`);
+                    thumbButton.className = (`thumbButton`);
+                // ##################################
+
                 let divThumb = document.createElement(`div`);
-                divThumb.className = (`divThumb`);
-                divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                    divThumb.className = (`divThumb`);
+                    divThumb.textContent = (`${exchangeName}`);
                 let divThumbGuts = document.createElement(`div`);
-                divThumbGuts.className = (`divThumbGuts`);
-                divThumbGuts.innerHTML = (`
-                Rank: ${exchangeRank}</p>
-                <p>24hr % change: ${exchangePct24}</p>
-                <p>Vol: </br>${exchangeVol24}</p>
-                <p>Price(USD): $${round(exchangePrice, 4)}</p>
-                <p><form method="GET">
-                <input type="hidden" name="search" value="${searchData}">
-                ${addData}
-                <button type="submit">ADD</button></form></p>
-                `)
-                divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                    divThumbGuts.className = (`divThumbGuts`);
+                    divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                    divThumbGuts.innerHTML = (`
+                    ${exchangeSymbol}
+                    <br><img src="${coinLogo}" alt="logo" height = "100px" width = "100px" align="center" style="margin:7px">
+                    <input type="hidden" name="search" value="${searchData}">
+                    ${limitData}
+                    ${addData}
+                    `)
+                divThumb.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 divThumb.appendChild(divThumbGuts);
-                divScroll.appendChild(divThumb);
+                thumbButton.appendChild(divThumb);
+                thumbForm.appendChild(thumbButton);
+                divScroll.appendChild(thumbForm);
             };
         };
     });
 });
 
 // python -m SimpleHTTPServer
-
