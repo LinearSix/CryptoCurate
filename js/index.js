@@ -20,15 +20,36 @@ document.addEventListener('DOMContentLoaded', function() {
     //manually added Tron because it was being bi**h
     coinMap.TRON= {}
     coinMap.TRON.logo = `https://cdn.freebiesupply.com/logos/large/2x/tron-logo-png-transparent.png`
-    console.log(coinMap)
+    // console.log(coinMap)
 // below are variables that are used for getting data from query string
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
+    let searchLimit = (urlParams.get(`limit`));
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
 
 //Adding and removing from the middle main viewing area
     // HANDLE QUERYSTRING 
+    let limit;
+    if (searchLimit) {
+        switch (searchLimit) {
+            case `25`:
+                limit = document.getElementById(`25`);
+                limit.checked = true;
+                break;
+            case `50`:
+                limit = document.getElementById(`50`);
+                limit.checked = true;
+                break;
+            case `100`:
+                limit = document.getElementById(`100`);
+                limit.checked = true;
+                break;
+            default:
+                limit = document.getElementById(`100`);
+                limit.checked = true;
+        };
+    };
     let splitAdd = [];
     let splitTemp;
     if (searchAdd && searchRemove) {
@@ -40,8 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
         searchAdd = splitAdd.join();
-        console.log(splitAdd);
-        console.log(searchAdd);
     } else if (searchAdd) {
         splitTemp = [];
         splitTemp = searchAdd.split(",");
@@ -51,28 +70,28 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         };
         searchAdd = splitAdd.join();
-        console.log(splitAdd);
-        console.log(searchAdd);
-    }
+    };
 
 //CREATING A MESSAGE TO ALERT USER OF THEIR SELECTED SEARCH TYPE
     let searchMessage;
     switch (searchData) {
         case `rank`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
-            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=rank`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Market Cap`;
             break;
         case `volume`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=volume_24h`;
-            searchMessage = `Displaying Top 25 Coins by Trade Volume - 24 Hours`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=volume_24h`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Trade Volume - 24 Hours`;
             break;
         case `volitility`:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=percent_change_24h`;
-            searchMessage = `Displaying Top 25 Coins by Volitility - 24 hours`;
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=${searchLimit}&sort=percent_change_24h`;
+            searchMessage = `Displaying Top ${searchLimit} Coins by Volitility - 24 hours`;
             break;
         default:
             searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
             searchMessage = `Displaying Top 100 Coins by Market Cap`;
+            limit = document.getElementById(`100`);
+                limit.checked = true;
     };
     divMessage = document.getElementById(`searchMessage`);
     divMessage.textContent = (`${searchMessage}`);
@@ -87,21 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let divScroll = document.getElementById(`middleThumb`);
 
 // PREPARE & CREATE DIVS
-        let divMiddleMain = document.getElementById(`middleMain`);
-        let cardMain = document.createElement(`div`);
-            cardMain.className = (`cardMain`);
-
-        let cardAdd = document.createElement(`div`);
-            cardAdd.className = (`cardMain`);
-            
-        let divMainGuts = document.createElement(`div`);
-            divMainGuts.className = (`divMainGuts`);
+        
        
     // ITERATE THROUGH RESULTS
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
-            
-            
             let exchangeName = coinObjs[coinObj].name; 
             let exchangeId = coinObjs[coinObj].id;
             let exchangeSymbol = coinObjs[coinObj].symbol;
@@ -112,121 +121,93 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
     //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123        
-            let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'') ; console.log(logos)
-            let releaseYear = cryptoNonFinancial[`${exchangeName}`].year; 
-            let maxSupply = coinObjs[coinObj].max_supply; 
-            let description = cryptoNonFinancial[`${exchangeName}`].description; 
-            let circulatingSupply = coinObjs[coinObj].circulating_supply; 
-            let proofType = coinMap[exchangeName].proofType; 
-            let algorithm = coinMap[exchangeName].algorithm;
-            let founder= cryptoNonFinancial[`${exchangeName}`].founder;
-            let buy = 'https://poloniex.com/'            
+            // let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'') ; console.log(logos)
+            // let releaseYear = cryptoNonFinancial[`${exchangeName}`].year; 
+            // let maxSupply = coinObjs[coinObj].max_supply; 
+            // let description = cryptoNonFinancial[`${exchangeName}`].description; 
+            // let circulatingSupply = coinObjs[coinObj].circulating_supply; 
+            // let proofType = coinMap[exchangeName].proofType; 
+            // let algorithm = coinMap[exchangeName].algorithm;
+            // let founder= cryptoNonFinancial[`${exchangeName}`].founder;
+            // let buy = 'https://poloniex.com/'            
         
-            // POPULATE MAIN CARD
-            if (searchAdd) {
-                if (Number(searchAdd) === Number(exchangeId)) {
-                    // console.log(`searchData: ${searchData}`);
-                    // console.log(exchangeId);
-
-                    cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
-                    cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
-                    divMiddleMain.appendChild(cardMain);
-
-                    divMainGuts.innerHTML = (`
-                    Rank: ${exchangeRank}</p>
-                    <p>24hr %Change: ${exchangePct24}</p>
-                    <p>Vol: ${exchangeVol24}</p>
-                    <p>Price(USD): $${round(exchangePrice, 2)}</p>
-                    <p>Mkt Cap: ${marketCap}</p>
-                    <p>Max Supply: ${maxSupply}</p>
-                    <p>Circulating Supply: ${circSupply}</p>
-                    <p><form method="GET">
-                    <input type="hidden" name="searchInput" value="">
-                    <input type="hidden" name="searchSelect" value="${searchData}">
-                    <input type="hidden" name="add" value="${exchangeId}">
-                    <button type="submit">REMOVE</button></form></p>
-                    `);
-                    cardMain.appendChild(divMainGuts);
+        
+            let divMiddleMain = document.getElementById(`middleMain`);
+            let cardMain = document.createElement(`div`);
+                cardMain.className = (`cardMain`);
+            let cardAdd = document.createElement(`div`);
+                cardAdd.className = (`cardMain`);
+            
+            let divMainGuts = document.createElement(`div`);
+                divMainGuts.className = (`divMainGuts`);
+            
+            // if the current element matches one in the querystring add array
+            // make a BIG card
+            if (splitAdd.includes(`${exchangeId}`)) {
+                let addData;
+                let persistData;
+                let limitData;
+                if (searchAdd) {
+                    addData = `<input type="hidden" name="add" value="${searchAdd}"></input>`;
                 };
-            };
-        };
-
-    // FUNCTION TO ELIMINATE ADDED CARDS FROM THUMBNAILS AREA
-        //*****  Consider Removal  *******************
-        let difference = function(arrayOne, arrayTwo) {
-            // Place your solution here
-            let arrayOneSample;
-            let arrayTwoSample;
-            for (let i = 0; i < arrayOne.length; i++) {
-                arrayOneSample = arrayOne[i];
-                //console.log(arrayOneSample);
-                for (j = 0; j < arrayTwo.length; j++) {
-                    arrayTwoSample = arrayTwo[j];
-                    //console.log(arrayTwoSample);
-                    if (arrayOneSample === arrayTwoSample) {
-                        //console.log(arrayOneSample);
-                        arrayOne.splice(i, 1);
-                        i = i-1;
-                    };
+                if (searchData) {
+                    persistData = `<input type="hidden" name="search" value="${searchData}"></input>`;
                 };
-            };
-            return arrayOne;
-        };
-        // ***************************
-    
-    //Creating the thumbnail
-        for (let coinObj in difference(coinObjs, splitAdd)) {
-            let exchangeName = coinObjs[coinObj].name;
-            let exchangeId = coinObjs[coinObj].id;
-            let exchangeSymbol = coinObjs[coinObj].symbol;
-            let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
-            let maxSupply = coinObjs[coinObj].max_supply;
-            let circSupply = coinObjs[coinObj].circulating_supply
-            let releaseYear;
-            let exchangeRank = coinObjs[coinObj].rank;
-            let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
-            let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
-            let exchangePrice = coinObjs[coinObj].quotes.USD.price;
-            if (searchAdd === null) {
-                let divThumb = document.createElement(`div`);
-                divThumb.className = (`divThumb`);
-                divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
-                let divThumbGuts = document.createElement(`div`);
-                divThumbGuts.className = (`divThumbGuts`);
-                divThumbGuts.innerHTML = (`
+                if (searchLimit) {
+                    limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+                };
+                cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                divMainGuts.innerHTML = (`
                 Rank: ${exchangeRank}</p>
-                <p><img src=${logo} alt="logo" height = 30px width = 30px></p>
-                <p>Vol: </br>${exchangeVol24}</p>
-                <p>Price(USD): $${round(exchangePrice, 2)}</p>
+                <p>24hr %Change: ${exchangePct24}</p>
+                <p>Vol: ${exchangeVol24}</p>
+                <p>Price(USD): $${round(exchangePrice, 6)}</p>
+                <p>Mkt Cap: ${marketCap}</p>
+                <p>Max Supply: </p>
+                <p>Circulating Supply: ${circSupply}</p>
                 <p><form method="GET">
-                <input type="hidden" name="search" value="${searchData}">
-                <input type="hidden" name="add" value="${exchangeId}">
-                <button type="submit">ADD</button></form></p>
-                `)
-                divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
-                divThumb.appendChild(divThumbGuts);
-                divScroll.appendChild(divThumb);
+                ${limitData}
+                ${persistData}
+                ${addData}
+                <input type="hidden" name="remove" value="${exchangeId}">
+                <button class="remove" type="submit">REMOVE</button></form></p>
+                `);
+                cardMain.appendChild(divMainGuts);
+                divMiddleMain.appendChild(cardMain);
             } else {
+                // make a thumbnail
+                let addData;
+                if (searchAdd) {
+                    addData = `<input type="hidden" name="add" value="${searchAdd},${exchangeId}"></input>`;
+                } else {
+                    addData = `<input type="hidden" name="add" value="${exchangeId}"></input>`;
+                };
+                let limitData;
+                if (searchLimit) {
+                    limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+                };
                 let divThumb = document.createElement(`div`);
                 divThumb.className = (`divThumb`);
                 divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
                 let divThumbGuts = document.createElement(`div`);
                 divThumbGuts.className = (`divThumbGuts`);
                 divThumbGuts.innerHTML = (`
-                Rank: ${exchangeRank}</p>
-                <p>24hr % change: ${exchangePct24}</p>
-                <p><img src=${logo} alt="logo" height = 30px width = 30px></p>
-                <p>Vol: </br>${exchangeVol24}</p>
-                <p>Price(USD): $${round(exchangePrice, 2)}</p>
-                <p><form method="GET">
+                Rank: ${exchangeRank}
+                <br>24hr % change: ${exchangePct24}
+                <br><img src=${logo} alt="logo" height = 30px width = 30px>
+                <br>Vol: ${exchangeVol24}
+                <br>Price(USD): $${round(exchangePrice, 4)}
+                <br><form method="GET">
                 <input type="hidden" name="search" value="${searchData}">
-                <input type="hidden" name="add" value="${searchAdd},${exchangeId}">
-                <button type="submit">ADD</button></form></p>
+                ${limitData}
+                ${addData}
+                <button class="add" type="submit">ADD</button></form>
                 `)
                 divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 divThumb.appendChild(divThumbGuts);
                 divScroll.appendChild(divThumb);
-            }
+            };
         };
     });
 });
