@@ -121,17 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
     //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123        
-            // let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'') ; console.log(logos)
+            let logo = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'https://opengameart.org/sites/default/files/Coin_0.png') ; console.log(logo)
             let releaseYear = (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].year : "")
-            //
-            // let maxSupply = coinObjs[coinObj].max_supply; 
-            // let description = cryptoNonFinancial[`${exchangeName}`].description; 
-            // let circulatingSupply = coinObjs[coinObj].circulating_supply; 
-            // let proofType = coinMap[exchangeName].proofType; 
-            // let algorithm = coinMap[exchangeName].algorithm;
-            // let founder= cryptoNonFinancial[`${exchangeName}`].founder;
-            // let buy = 'https://poloniex.com/'            
-            console.log(releaseYear);
+            let maxSupply = coinObjs[coinObj].max_supply; 
+            let description = (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].description : "")
+            let circulatingSupply = coinObjs[coinObj].circulating_supply; 
+            let proofType = coinMap[exchangeName].proofType; 
+            let algorithm = coinMap[exchangeName].algorithm;
+            let founder= (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].founder : "")
+            let buy = 'https://poloniex.com/'            
+            console.log(algorithm);
             
             let divMiddleMain = document.getElementById(`middleMain`);
             let cardMain = document.createElement(`div`);
