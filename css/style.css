@@ -18,7 +18,7 @@ div#tableInput{
 }
 div#logo{
     color: white;
-    text-shadow: rgb(18, 54, 24) 1px 0 20px;
+    text-shadow: rgb(0, 0, 0) 0px 0 1px;
     width: 300px;
     height: 70px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -121,8 +121,8 @@ input#searchMain {
     text-shadow: rgb(255, 255, 255) 1px 1px 2px;
  }
 div.cardMain{
-    width: 205px;
-    height: 250px;
+    width: 250px;
+    height: 350px;
     border: 2px solid black;
     border-radius: 7px;
     background-color: #b4b4b4;
@@ -155,17 +155,18 @@ div.cardMain{
     overflow: hidden;
 }
 .divMainGuts{
-    width: 176px;
-    height: 192px;
+    width: 221px;
+    height: 297px;
     border: 1px solid black;
     border-radius: 5px;
     margin: 6px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10px;
+    /* font-size: 10px; */
     font-weight: normal;
     color: black;
     text-shadow: rgb(255, 255, 255) 0px 0 0px;
     text-align: left;
+    vertical-align: top;
     padding: 6px;
     /* padding-top: 10px; */
 }
@@ -191,13 +192,24 @@ div.cardMain{
     background-color: #b7e7d6;
     align-content: left;
 }
-h4{
+h3{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
-    size: 15px;
-    font-weight: normal;
-    text-shadow: rgb(8, 24, 11) 1px 0 10px;
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
+h5{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+};
+h6{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+};
 button.thumbButton{
     width: 152px;
     height: 162px;

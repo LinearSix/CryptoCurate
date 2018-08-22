@@ -167,21 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input type="hidden" name="remove" value="${coinId}"></form>
                 `);
             divMainGuts.innerHTML = (`
-            <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" align="left">
-            <h3>${ticker}</h3><br>
-            <h5>Since ${year}</h5><br>
-            <p id="price">Price <stong>$${round(price, 6)}</stong></p>
-            #${rank} in Market Cap<br>
-            ($${marketCap})<br>
-            %Change 24h ${exPerc24h}<br>
-            Exchange Vol 24h ${exVol24h}<br>
-            Max Supply ${maxSupply}<br>
-            Circulating Supply ${circSupply}<br>
-            Consensus Type ${proofType}<br>
-            Hash Algorithm ${algorithm}<br>
-            Founder(s) ${founder}<br>
-            <i>${description}</i>
-            `);
+                <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" style="float:left;">
+                <font style="font-size:18px;" style="text-align:top;"><b>${ticker}</b></font>
+                <br><font style="font-size:11px;">Since ${year}</font>
+                <p><font style="font-size:12px;"><b>$${round(price, 6)}</b></font>
+                <p><font style="font-size:10px;"><b>#${rank} in Market Cap</b></font>
+                <br><font style="font-size:10px;">($${marketCap})</font>
+                <p><font style="font-size:10px;">%Change 24h <b>${exPerc24h}</b></font>
+                <br><font style="font-size:10px;">Exchange Vol 24h <b>${exVol24h}</b></font>
+                <br><font style="font-size:10px;">Max Supply <b>${maxSupply}</b></font>
+                <br><font style="font-size:10px;">Circulating Supply <b>${circSupply}</b></font>
+                <br><font style="font-size:10px;">Consensus Type <b>${proofType}</b></font>
+                <br><font style="font-size:10px;">Hash Algorithm <b>${algorithm}</b></font>
+                <br><font style="font-size:10px;">Founder(s) <b>${founder}</b></font>
+                <p><font style="font-size:10px;"><i>${description}</i></font>
+                `);
             divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
             cardMain.appendChild(divMainGuts);
             divMiddleMain.appendChild(cardMain);
