@@ -1,5 +1,6 @@
 
-//cryptoNonFinancial is an object of information about 38 coins. 
+//cryptoNonFinancial is an object of information about 38 coins.
+
 const cryptoNonFinancial = {
   "Primecoin" : {
     "year": 2013,
@@ -420,6 +421,11 @@ const cryptoNonFinancial = {
     "description": ""
   }
 }
+let cryptoNonFinancialArray = [];
+   for (let coin in cryptoNonFinancial) {
+       cryptoNonFinancialArray.push(coin);
+   }; 
+   
 
 //A Few Templates for Accessing Data
 
