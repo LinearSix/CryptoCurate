@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <br><font style="font-size:10px;">Consensus Type <b>${proofType}</b></font>
                 <br><font style="font-size:10px;">Hash Algorithm <b>${algorithm}</b></font>
                 <br><font style="font-size:10px;">Founder(s) <b>${founder}</b></font>
-                <p><font style="font-size:10px;"><i>${description}</i></font>
+                <p><font style="font-size:8px;"><i>${description}</i></font>
                 `);
             divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
             cardMain.appendChild(divMainGuts);
