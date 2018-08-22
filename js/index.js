@@ -121,13 +121,12 @@ document.addEventListener('DOMContentLoaded', function() {
         let exVol24h = coinObjs[coinObj].quotes.USD.volume_24h;
         let price = coinObjs[coinObj].quotes.USD.price;
         let logo = (coinMapArray.includes(coinName) ? coinMap[coinName].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
-        let year = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].year : "")
-        let maxSupply = coinObjs[coinObj].max_supply;
-        console.log(maxSupply);
+        let year = (cryptoNonFinancialArray.includes(coinName) ? `Since ${cryptoNonFinancial[coinName].year}` : "----------")
+        let maxSupply = (coinObjs[coinObj].max_supply === null ? "unlimited" : coinObjs[coinObj].max_supply);
         let description = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].description : "")
         let proofType = (coinMapArray.includes(coinName) ? coinMap[coinName].proofType :"");
         let algorithm = (coinMapArray.includes(coinName) ? coinMap[coinName].algorithm :"");
-        let founder= (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].founder : "")
+        let founder= (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].founder : "unknown")
                                 
         let divMiddleMain = document.getElementById(`middleMain`);
         let cardMain = document.createElement(`div`);
@@ -169,12 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
             divMainGuts.innerHTML = (`
                 <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" style="float:left;">
                 <font style="font-size:18px;" style="text-align:top;"><b>${ticker}</b></font>
-                <br><font style="font-size:11px;">Since ${year}</font>
+                <br><font style="font-size:11px;">${year}</font>
                 <p><font style="font-size:12px;"><b>$${round(price, 6)}</b></font>
                 <p><font style="font-size:10px;"><b>#${rank} in Market Cap</b></font>
                 <br><font style="font-size:10px;">($${marketCap})</font>
-                <p><font style="font-size:10px;">%Change 24h <b>${exPerc24h}</b></font>
-                <br><font style="font-size:10px;">Exchange Vol 24h <b>${exVol24h}</b></font>
+                <p><font style="font-size:10px;">24h Change <b>${exPerc24h}%</b></font>
+                <br><font style="font-size:10px;">24h Exchange Vol <b>${exVol24h}</b></font>
                 <br><font style="font-size:10px;">Max Supply <b>${maxSupply}</b></font>
                 <br><font style="font-size:10px;">Circulating Supply <b>${circSupply}</b></font>
                 <br><font style="font-size:10px;">Consensus Type <b>${proofType}</b></font>
