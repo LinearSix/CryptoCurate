@@ -121,13 +121,13 @@ input#searchMain {
     text-shadow: rgb(255, 255, 255) 1px 1px 2px;
  }
 div.cardMain{
-    width: 200px;
+    width: 205px;
     height: 250px;
     border: 2px solid black;
-    border-radius: 5px;
-    background-color: rgb(224, 219, 218);
-    margin-left: 7px;
-    margin-right: 7px;
+    border-radius: 7px;
+    background-color: #b4b4b4;
+    margin-left: 8px;
+    margin-right: 8px;
     margin-top: 5px;
     box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -145,7 +145,7 @@ div.cardMain{
     /* margin: 6px; */
     box-shadow: 2px 2px 3px rgb(197, 207, 178);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: normal;
     color: white;
     text-shadow: rgb(0, 0, 0) 1px 1px 2px;
@@ -156,11 +156,10 @@ div.cardMain{
 }
 .divMainGuts{
     width: 176px;
-    height: 199px;
+    height: 192px;
     border: 1px solid black;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin: 5px;
+    border-radius: 5px;
+    margin: 6px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10px;
     font-weight: normal;
@@ -168,7 +167,7 @@ div.cardMain{
     text-shadow: rgb(255, 255, 255) 0px 0 0px;
     text-align: left;
     padding: 6px;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 .divThumbGuts{
     width: 130px;
@@ -213,21 +212,26 @@ button.thumbButton:hover {
     background-color: aquamarine;
 }
 button.remove{
-    width: 80px;
-    height: 20px;
-    color: white;
-    background-color: #4eca86;
-    border: 1px solid aquamarine;
-    border-radius: 10px;
-    margin-left: 10px;
-    margin-top: 5px;
+    float: right;
+    /* width: 80px; */
+    /* height: 20px; */
+    color: #666666;
+    background-color: #b4b4b4;
+    border: 0px;
+    /* border-radius: 10px; */
+    margin-right: 4px;
+    /* margin-top: 5px; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 11px;
-    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
-    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+    font-size: 18px;
+    /* text-shadow: rgb(0, 0, 0) 1px 1px 2px; */
+    /* box-shadow: 0 0px 10px 0 rgb(197, 207, 178); */
 }
 button.remove:hover {
-    background-color: aquamarine;
-    color: rgb(0, 0, 0);
-    text-shadow: rgb(255, 255, 255) 1px 1px 2px;
+    background-color: rgb(160, 160, 160);
+    /* color: #808080; */
+    /* text-shadow: rgb(255, 255, 255) 1px 1px 2px; */
+}
+.mainLogo{
+    margin-bottom: 7px;
+    margin-right: 7px;
 }

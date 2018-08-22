@@ -7,17 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     //building of coinMap using data from Crypto Compare (in a static js file)
     for (let key in cryptoCompData.Data) {
         coinMap[cryptoCompData.Data[key].CoinName] = {}
-        coinMap[cryptoCompData.Data[key].CoinName].name = (cryptoCompData.Data[key].CoinName || "")
-        coinMap[cryptoCompData.Data[key].CoinName].ticker = (cryptoCompData.Data[key].Symbol || "")
-        coinMap[cryptoCompData.Data[key].CoinName].logo = (`https://www.cryptocompare.com${cryptoCompData.Data[key].ImageUrl}` || "")
-        coinMap[cryptoCompData.Data[key].CoinName].algorithm = (cryptoCompData.Data[key].Algorithm || "")
-        coinMap[cryptoCompData.Data[key].CoinName].proofType = (cryptoCompData.Data[key].ProofType || "")
-    };
-    let cryptoNonFinancialArray = [];
-    for (let coin in cryptoNonFinancial) {
-        cryptoNonFinancialArray.push(coin);
-    };
-    console.log(cryptoNonFinancialArray);
+        coinMap[cryptoCompData.Data[key].CoinName].name = cryptoCompData.Data[key].CoinName
+        coinMap[cryptoCompData.Data[key].CoinName].ticker = cryptoCompData.Data[key].Symbol
+        coinMap[cryptoCompData.Data[key].CoinName].logo = `https://www.cryptocompare.com${cryptoCompData.Data[key].ImageUrl}`
+        coinMap[cryptoCompData.Data[key].CoinName].algorithm = cryptoCompData.Data[key].Algorithm
+        coinMap[cryptoCompData.Data[key].CoinName].proofType = cryptoCompData.Data[key].ProofType
+    }
     //using topCoins from Coin Market Cap to add search ID to coinMap
     for (let key in coinMap) {
         coinMap[key].id = nameId[coinMap[key].name]
@@ -114,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
        
     // ITERATE THROUGH RESULTS
-        let buy = 'https://poloniex.com/';
+        let buy = 'https://poloniex.com/';    
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
             let exchangeName = coinObjs[coinObj].name; 
@@ -126,29 +121,18 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
-    //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123 
-            if (cryptoNonFinancialArray.includes(`${exchangeName}`)) {
-                let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'');
-                    // console.log(logos);
-                let releaseYear = cryptoNonFinancial[`${exchangeName}`].year;
-                    // console.log(releaseYear)
-                let maxSupply = coinObjs[coinObj].max_supply;
-                    // console.log(maxSupply)
-                let description = cryptoNonFinancial[`${exchangeName}`].description;
-                    // console.log(description)
-                let circulatingSupply = coinObjs[coinObj].circulating_supply;
-                    // console.log(circulatingSupply)
-                let proofType = coinMap[exchangeName].proofType;
-                    // console.log(proofType)
-                let algorithm = coinMap[exchangeName].algorithm;
-                    // console.log(algorithm)
-                let founder = cryptoNonFinancial[`${exchangeName}`].founder;
-                    // console.log(founder)
-            };
+    //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123        
+            let logo = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'https://opengameart.org/sites/default/files/Coin_0.png') ; console.log(logo)
+            let releaseYear = (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].year : "")
+            let maxSupply = coinObjs[coinObj].max_supply; 
+            let description = (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].description : "")
+            let circulatingSupply = coinObjs[coinObj].circulating_supply; 
+            let proofType = coinMap[exchangeName].proofType; 
+            let algorithm = coinMap[exchangeName].algorithm;
+            let founder= (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].founder : "")
+                    
+            // console.log(algorithm);
             
-            
-        
-        
             let divMiddleMain = document.getElementById(`middleMain`);
             let cardMain = document.createElement(`div`);
                 cardMain.className = (`cardMain`);
@@ -166,35 +150,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 let limitData;
                 if (searchAdd) {
                     addData = `<input type="hidden" name="add" value="${searchAdd}"></input>`;
+                } else {
+                    addData = ``;
                 };
                 if (searchData) {
                     persistData = `<input type="hidden" name="search" value="${searchData}"></input>`;
+                } else {
+                    persistData = ``;
                 };
                 if (searchLimit) {
                     limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+                } else {
+                    limitData = ``;
                 };
-                cardMain.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
-                cardMain.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                cardMain.innerHTML = (`
+                <form method="GET"><nobr>${exchangeName} | ${exchangeSymbol}<button class="remove" type="submit">X</button></nobr>
+                ${limitData}
+                ${persistData}
+                ${addData}
+                <input type="hidden" name="remove" value="${exchangeId}"></form>
+                `);
                 divMainGuts.innerHTML = (`
-                Rank: ${exchangeRank}</p>
+                <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" align="left">
+                Rank: ${exchangeRank}<br>
+                
                 <p>24hr %Change: ${exchangePct24}</p>
                 <p>Vol: ${exchangeVol24}</p>
                 <p>Price(USD): $${round(exchangePrice, 6)}</p>
                 <p>Mkt Cap: ${marketCap}</p>
                 <p>Max Supply: </p>
                 <p>Circulating Supply: ${circSupply}</p>
-                <p><form method="GET">
-                ${limitData}
-                ${persistData}
-                ${addData}
-                <input type="hidden" name="remove" value="${exchangeId}">
-                <button class="remove" type="submit">REMOVE</button></form></p>
+                
                 `);
+                divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 cardMain.appendChild(divMainGuts);
                 divMiddleMain.appendChild(cardMain);
             } else {
                 // make a thumbnail
-                let coinLogo = `https://en.bitcoin.it/w/images/en/2/29/BC_Logo_.png`;
                 let addData;
                 if (searchAdd) {
                     addData = `<input type="hidden" name="add" value="${searchAdd},${exchangeId}"></input>`;
@@ -207,28 +200,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     limitData = ``;
                 };
-                // try making thumb a big button
-                // #################################
+                // make thumb a big button
                 let thumbForm = document.createElement(`form`);
                     thumbForm.method = (`GET`);
                 let thumbButton = document.createElement(`button`);
                     thumbButton.type = (`submit`);
                     thumbButton.className = (`thumbButton`);
-                // ##################################
-
                 let divThumb = document.createElement(`div`);
-                    divThumb.className = (`divThumb`);
-                    divThumb.textContent = (`${exchangeName}`);
+                divThumb.className = (`divThumb`);
+                divThumb.textContent = (`${exchangeName}`);
                 let divThumbGuts = document.createElement(`div`);
-                    divThumbGuts.className = (`divThumbGuts`);
-                    divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
-                    divThumbGuts.innerHTML = (`
-                    ${exchangeSymbol}
-                    <br><img src="${coinLogo}" alt="logo" height = "100px" width = "100px" align="center" style="margin:7px">
-                    <input type="hidden" name="search" value="${searchData}">
-                    ${limitData}
-                    ${addData}
-                    `)
+                divThumbGuts.className = (`divThumbGuts`);
+                divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                divThumbGuts.innerHTML = (`
+                ${exchangeSymbol}
+                    <br><img src="${logo}" alt="logo" height = "100px" width = "100px" align="center" style="margin:7px">
+                <input type="hidden" name="search" value="${searchData}">
+                ${limitData}
+                ${addData}
+                `)
                 divThumb.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 divThumb.appendChild(divThumbGuts);
                 thumbButton.appendChild(divThumb);
