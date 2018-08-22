@@ -1,0 +1,60 @@
+div#middleMain{
+    width: 99%;
+    /* height: 200px; */
+    background-color: #e6e9e8;
+    border-top: 1px solid rgb(107, 107, 107);
+    overflow: scroll;
+}
+div.cardMain{
+    width: 250px;
+    height: 350px;
+    border: 2px solid black;
+    border-radius: 7px;
+    background-color: #b4b4b4;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 5px;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    color: white;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    padding: 0px;
+    padding-top: 6px;
+}
+.divMainGuts{
+    width: 221px;
+    height: 297px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-size: 10px; */
+    font-weight: normal;
+    color: black;
+    text-shadow: rgb(255, 255, 255) 0px 0 0px;
+    text-align: left;
+    vertical-align: top;
+    padding: 6px;
+    /* padding-top: 10px; */
+}
+button.remove{
+    float: right;
+    /* width: 80px; */
+    /* height: 20px; */
+    color: #666666;
+    background-color: #b4b4b4;
+    border: 0px;
+    /* border-radius: 10px; */
+    margin-right: 4px;
+    /* margin-top: 5px; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    /* text-shadow: rgb(0, 0, 0) 1px 1px 2px; */
+    /* box-shadow: 0 0px 10px 0 rgb(197, 207, 178); */
+}
+button.remove:hover {
+    background-color: rgb(160, 160, 160);
+    /* color: #808080; */
+    /* text-shadow: rgb(255, 255, 255) 1px 1px 2px; */
+}

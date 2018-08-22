@@ -1,0 +1,52 @@
+div#middleThumb{
+    width: 99%;
+    height: 500px;
+    overflow: scroll;
+    background-color: white;
+    align-content: center;
+}
+button.thumbButton{
+    width: 152px;
+    height: 162px;
+    float: left;
+    padding: 0px;
+    border: 0px white;
+    border-radius: 3px;
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
+    margin: 10px;
+}
+button.thumbButton:hover {
+    background-color: aquamarine;
+}
+.divThumb{
+    width: 150px;
+    height: 160px;
+    background-color: #b4b4b4;
+    border-radius: 5px;
+    /* margin: 6px; */
+    box-shadow: 2px 2px 3px rgb(197, 207, 178);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    color: white;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    padding: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    overflow: hidden;
+}
+.divThumbGuts{
+    width: 130px;
+    height: 125px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+    text-shadow: rgb(255, 255, 255) 0px 0 0px;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+}
