@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log(`we are connected`);
-
 // Cors Anywhere!    
     let cors = `https://cors-anywhere.herokuapp.com/`
 //coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
@@ -18,7 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let key in coinMap) {
         coinMap[key].id = nameId[coinMap[key].name]
     }
-  console.log(coinMap);
+    //manually added Tron because it was being bi**h
+    coinMap.TRON= {}
+    coinMap.TRON.logo = `https://cdn.freebiesupply.com/logos/large/2x/tron-logo-png-transparent.png`
+    console.log(coinMap)
 // below are variables that are used for getting data from query string
     let urlParams = new URLSearchParams(window.location.search);
     let searchData = (urlParams.get(`search`));
@@ -98,7 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // ITERATE THROUGH RESULTS
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
-            let exchangeName = coinObjs[coinObj].name;
+            
+            
+            let exchangeName = coinObjs[coinObj].name; 
             let exchangeId = coinObjs[coinObj].id;
             let exchangeSymbol = coinObjs[coinObj].symbol;
             let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
@@ -107,18 +111,16 @@ document.addEventListener('DOMContentLoaded', function() {
             let exchangePct24 = coinObjs[coinObj].quotes.USD.percent_change_24h;
             let exchangeVol24 = coinObjs[coinObj].quotes.USD.volume_24h;
             let exchangePrice = coinObjs[coinObj].quotes.USD.price;
-            //let releaseYear = cryptoNonFinancial[`${exchangeName}`].year;
-            let logo = (coinMap[exchangeName].logo ? coinMap[exchangeName].logo : ''); console.log(logo)
-            let maxSupply = coinObjs[coinObj].max_supply;
-            //let description = cryptoNonFinancial[`${exchangeName}`].description;
-            let circulatingSupply = coinObjs[coinObj].circulating_supply;
-            let prooftype = coinMap[exchangeName].prooftype;
+    //This is where things start getting finicky. To get full functionality back, comment out lines 115 - 123        
+            let logos = (coinMap[`${exchangeName}`].logo ? `${coinMap[`${exchangeName}`].logo}` :'') ; console.log(logos)
+            let releaseYear = cryptoNonFinancial[`${exchangeName}`].year; 
+            let maxSupply = coinObjs[coinObj].max_supply; 
+            let description = cryptoNonFinancial[`${exchangeName}`].description; 
+            let circulatingSupply = coinObjs[coinObj].circulating_supply; 
+            let proofType = coinMap[exchangeName].proofType; 
             let algorithm = coinMap[exchangeName].algorithm;
-            //let founder= cryptoNonFinancial[`${exchangeName}`].founder;
-            let buy = 'https://poloniex.com/'
-
-
-            
+            let founder= cryptoNonFinancial[`${exchangeName}`].founder;
+            let buy = 'https://poloniex.com/'            
         
             // POPULATE MAIN CARD
             if (searchAdd) {
@@ -193,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 divThumbGuts.className = (`divThumbGuts`);
                 divThumbGuts.innerHTML = (`
                 Rank: ${exchangeRank}</p>
-                <p>24hr %Change: ${exchangePct24}</p>
+                <p><img src=${logo} alt="logo" height = 30px width = 30px></p>
                 <p>Vol: </br>${exchangeVol24}</p>
                 <p>Price(USD): $${round(exchangePrice, 2)}</p>
                 <p><form method="GET">
@@ -213,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 divThumbGuts.innerHTML = (`
                 Rank: ${exchangeRank}</p>
                 <p>24hr % change: ${exchangePct24}</p>
+                <p><img src=${logo} alt="logo" height = 30px width = 30px></p>
                 <p>Vol: </br>${exchangeVol24}</p>
                 <p>Price(USD): $${round(exchangePrice, 2)}</p>
                 <p><form method="GET">
