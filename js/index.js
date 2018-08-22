@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 limit.checked = true;
                 break;
             default:
-                limit = document.getElementById(`100`);
+                limit = document.getElementById(`25`);
                 limit.checked = true;
         };
     };
@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             searchMessage = `Displaying Top ${searchLimit} Coins by Volitility - 24 hours`;
             break;
         default:
-            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=100&sort=rank`;
-            searchMessage = `Displaying Top 100 Coins by Market Cap`;
-            limit = document.getElementById(`100`);
+            searchMain = `https://api.coinmarketcap.com/v2/ticker/?limit=25&sort=rank`;
+            searchMessage = `Displaying Top 25 Coins by Market Cap`;
+            limit = document.getElementById(`25`);
                 limit.checked = true;
     };
     divMessage = document.getElementById(`searchMessage`);
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${cors}${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
-        console.log(data);
+        // console.log(data);
         let coinObjs = data.data;
         let divScroll = document.getElementById(`middleThumb`);
 
@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
        
     // ITERATE THROUGH RESULTS
+        let buy = 'https://poloniex.com/';    
         for (let coinObj in coinObjs) {
             // POPULATE SELECT OPTIONS
             let exchangeName = coinObjs[coinObj].name; 
@@ -129,8 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
             let proofType = coinMap[exchangeName].proofType; 
             let algorithm = coinMap[exchangeName].algorithm;
             let founder= (cryptoNonFinancialArray.includes(exchangeName) ? cryptoNonFinancial[`${exchangeName}`].founder : "")
-            let buy = 'https://poloniex.com/'            
-            console.log(algorithm);
+                    
+            // console.log(algorithm);
             
             let divMiddleMain = document.getElementById(`middleMain`);
             let cardMain = document.createElement(`div`);
@@ -186,27 +187,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 let limitData;
                 if (searchLimit) {
                     limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
+                } else {
+                    limitData = ``;
                 };
+                // make thumb a big button
+                let thumbForm = document.createElement(`form`);
+                    thumbForm.method = (`GET`);
+                let thumbButton = document.createElement(`button`);
+                    thumbButton.type = (`submit`);
+                    thumbButton.className = (`thumbButton`);
                 let divThumb = document.createElement(`div`);
                 divThumb.className = (`divThumb`);
-                divThumb.textContent = (`${exchangeName} | ${exchangeSymbol}`);
+                divThumb.textContent = (`${exchangeName}`);
                 let divThumbGuts = document.createElement(`div`);
                 divThumbGuts.className = (`divThumbGuts`);
+                divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 divThumbGuts.innerHTML = (`
-                Rank: ${exchangeRank}
-                <br>24hr % change: ${exchangePct24}
-                <br><img src=${logo} alt="logo" height = 30px width = 30px>
-                <br>Vol: ${exchangeVol24}
-                <br>Price(USD): $${round(exchangePrice, 4)}
-                <br><form method="GET">
+                ${exchangeSymbol}
+                    <br><img src="${logo}" alt="logo" height = "100px" width = "100px" align="center" style="margin:7px">
                 <input type="hidden" name="search" value="${searchData}">
                 ${limitData}
                 ${addData}
-                <button class="add" type="submit">ADD</button></form>
                 `)
-                divThumb.style.background = (`#${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
+                divThumb.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(exchangeName)),20)}`);
                 divThumb.appendChild(divThumbGuts);
-                divScroll.appendChild(divThumb);
+                thumbButton.appendChild(divThumb);
+                thumbForm.appendChild(thumbButton);
+                divScroll.appendChild(thumbForm);
             };
         };
     });

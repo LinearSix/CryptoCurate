@@ -21,7 +21,7 @@ div#logo{
     text-shadow: rgb(18, 54, 24) 1px 0 20px;
     width: 300px;
     height: 70px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 50px;
     font-weight: bold;
     background-color: #b7e7d6;
@@ -67,6 +67,7 @@ div#middleThumb{
     height: 500px;
     overflow: scroll;
     background-color: white;
+    align-content: center;
 }
 div#top{
     float: left;
@@ -206,7 +207,7 @@ button.thumbButton{
     border: 0px white;
     border-radius: 3px;
     box-shadow: 2px 2px 3px rgb(197, 207, 178);
-    margin: 12px;
+    margin: 10px;
 }
 button.thumbButton:hover {
     background-color: aquamarine;
