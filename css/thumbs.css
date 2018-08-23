@@ -16,7 +16,7 @@ button.thumbButton{
     margin: 10px;
 }
 button.thumbButton:hover {
-    background-color: aquamarine;
+    background-color: lightgrey;
 }
 .divThumb{
     width: 150px;
