@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
             cardMain.appendChild(divMainGuts);
             divMiddleMain.appendChild(cardMain);
+            divScroll.style.height = (`300px`);
         } else {
             // make thumbnail
             let addData;
