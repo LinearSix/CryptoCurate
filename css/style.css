@@ -14,13 +14,10 @@ table {
     margin-right: auto;
     border-width: 0px;
 }
-.scrollbar {
-    background-color: #e6e9e8;
-}
 div#logo{
     color: white;
     text-shadow: rgb(0, 0, 0) 1px 1px 2px;
-    width: 300px;
+    width: 400px;
     height: 70px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 50px;
@@ -102,12 +99,50 @@ input#searchMain {
     text-shadow: rgb(0, 0, 0) 1px 1px 2px;
     box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
  }
- button#user:hover {
+div#button{
+    width: 100px;
+    float: right;
+    /* height: 3px; */
+    color: white;
+    background-color: #b4b4b4;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+    /* padding-bottom: 30px; */
+    /* text-align: auto; */
+}
+button#user:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
     text-shadow: rgb(255, 255, 255) 1px 1px 2px;
  }
-
+ div#button{
+    width: 100px;
+    float: right;
+    /* height: 3px; */
+    color: white;
+    background-color: #b4b4b4;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11px;
+    text-shadow: rgb(0, 0, 0) 1px 1px 2px;
+    box-shadow: 0 0px 10px 0 rgb(197, 207, 178);
+    /* padding-bottom: 30px; */
+    /* text-align: auto; */
+}
+div#button:hover {
+    background-color: lightgrey;
+    color: rgb(0, 0, 0);
+    text-shadow: rgb(255, 255, 255) 1px 1px 2px;
+ }
 #topSpace{
     float: left;
     width: 95%;
@@ -136,4 +171,8 @@ h6{
 .mainLogo{
     margin-bottom: 7px;
     margin-right: 7px;
+}
+a{
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
 }
