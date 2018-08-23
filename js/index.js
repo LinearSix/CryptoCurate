@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(`we are connected`);
+    // console.log(`we are connected`);
 // Cors Anywhere!    
     let cors = `https://cors-anywhere.herokuapp.com/`
 //coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let divScroll = document.getElementById(`middleThumb`);
 
 // PREPARE & CREATE DIVS       
-    let buy = 'https://poloniex.com/';    
+    let cardCount = 0; 
     for (let coinObj in coinObjs) {
         let coinName = coinObjs[coinObj].name; 
         let coinId = coinObjs[coinObj].id;
@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let logo = (coinMapArray.includes(coinName) ? coinMap[coinName].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
         let year = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].year : "")
         let maxSupply = coinObjs[coinObj].max_supply;
-        console.log(maxSupply);
         let description = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].description : "")
         let proofType = (coinMapArray.includes(coinName) ? coinMap[coinName].proofType :"");
         let algorithm = (coinMapArray.includes(coinName) ? coinMap[coinName].algorithm :"");
@@ -139,7 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
         // if the current element matches one in the querystring add array
         // make a BIG card
-        if (splitAdd.includes(`${coinId}`)) {
+        if (splitAdd.includes(`${coinId}`) && cardCount < 5) {
+            cardCount++;
+
             let addData;
             let persistData;
             let limitData;
