@@ -1,11 +1,11 @@
-# CryptoCurate
+# CryptoCurious
 ### A cryptocurrency search and comparison web application
 The ever accelerating world of cryptocurrency can be daunting to newcomers.
-CryptoCurate allows the user to not only familiarize themselves with the vast array of coins available, 
+CryptoCurious allows the user to not only familiarize themselves with the vast array of coins available, 
 but to also dig more deeply into the minutia of what technologies and philosophies constitute each coin.
-The CryptoCurate web application utilizes three infomation sources and seemlessly combines them to give the user the richest experience.
+The CryptoCurious web application utilizes three infomation sources and seemlessly combines them to give the user the richest experience.
 
-## With CryptoCurate You Can:
+## With CryptoCurious You Can:
 * Search for coins based on highest market cap, trade volume, or volatility
 * Select the resulting coin cards to reveal detailed information about the cryptocurrency
 * Compare selected cards side-by-side
