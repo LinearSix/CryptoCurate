@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let divScroll = document.getElementById(`middleThumb`);
 
 // PREPARE & CREATE DIVS       
-    let cardCount = 0; 
+    let cardCount = 0;
     for (let coinObj in data.data) {
         let logo = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
-        let year = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].year : "")
-        let description = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].description : "")
+        let year = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].year : "");
+        let description = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].description : "");
         let proofType = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].proofType :"");
         let algorithm = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].algorithm :"");
-        let founder= (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].founder : "")                    
+        let founder= (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].founder : "");             
             document.createElement(`div`).className = (`cardMain`);
             document.createElement(`div`).className = (`cardMain`);       
             document.createElement(`div`).className = (`divMainGuts`);
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             // make thumbnail
             // check URL for passed data and keep it alive with hidden fields
-            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd},${coinId}"></input>` : `<input type="hidden" name="add" value="${coinId}"></input>`)
+            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd},${data.data[coinObj].id}"></input>` : `<input type="hidden" name="add" value="${data.data[coinObj].id}"></input>`)
             let limitData = (searchLimit ? `<input type="hidden" name="limit" value="${searchLimit}"></input>` : ``)
             // this makes each thumbnail a button encapsulated in a form
             let thumbForm = document.createElement(`form`);
