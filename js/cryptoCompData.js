@@ -1,15 +1,15 @@
-// THis is one very JSON that includes logo and other non-financial information. 
+// This is a very long JSON that includes logo and other non-financial information from CryptoCompare.com 
 
 const cryptoCompData = {"Response":"Success","Message":"Coin list succesfully returned! This api is moving to https://min-api.cryptocompare.com/data/all/coinlist, please change the path.","BaseImageUrl":"https://www.cryptocompare.com","BaseLinkUrl":"https://www.cryptocompare.com","DefaultWatchlist":{"CoinIs":"1182,7605,5038,24854,3807,3808,202330,5324,5031,20131","Sponsored":""},"SponosoredNews":[],"Data":{
     "BTC":{
         "Id":"1182",
         "Url":"/coins/btc/overview",
-        "ImageUrl":"/media/19633/btc.png",
+        "ImageUrl":"/media/19633/btc.png",  //<----
         "Name":"BTC","Symbol":"BTC",
-        "CoinName":"Bitcoin",
+        "CoinName":"Bitcoin",  //<----
         "FullName":"Bitcoin (BTC)",
-        "Algorithm":"SHA256",
-        "ProofType":"PoW",
+        "Algorithm":"SHA256",  //<----
+        "ProofType":"PoW",  //<----
         "FullyPremined":"0",
         "TotalCoinSupply":"21000000",
         "BuiltOn":"N/A",

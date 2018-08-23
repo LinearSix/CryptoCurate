@@ -1,5 +1,5 @@
 
-//cryptoNonFinancial is an object of information about 38 coins.
+//cryptoNonFinancial is an object of information about 38 coins built from a table off wikipedia.
 
 const cryptoNonFinancial = {
   "Primecoin" : {

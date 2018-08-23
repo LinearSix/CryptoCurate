@@ -1,6 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // console.log(`we are connected`);
-// Cors Anywhere!    
+document.addEventListener('DOMContentLoaded', function() {   
     let cors = `https://cors-anywhere.herokuapp.com/`
 //coinMap is a nested objectwith coin name as key and value contianing object with name, ticker, and CoinMarketCap ID 
     const coinMap = {};
@@ -13,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
         coinMap[cryptoCompData.Data[key].CoinName].algorithm = cryptoCompData.Data[key].Algorithm
         coinMap[cryptoCompData.Data[key].CoinName].proofType = cryptoCompData.Data[key].ProofType
     }
-    //using topCoins from Coin Market Cap to add search ID to coinMap
+    //add search ID from Coin Market Cap to coinMap
     for (let key in coinMap) {
         coinMap[key].id = nameId[coinMap[key].name]
     }
-    //manually added Tron because it was being b****
+    //manually added Tron because it was being a butt
     coinMap.TRON= {}
     coinMap.TRON.logo = `https://cdn.freebiesupply.com/logos/large/2x/tron-logo-png-transparent.png`
     let coinMapArray = [];
@@ -104,41 +102,24 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
-        // console.log(data);
-        let coinObjs = data.data;
         let divScroll = document.getElementById(`middleThumb`);
 
 // PREPARE & CREATE DIVS       
     let cardCount = 0; 
-    for (let coinObj in coinObjs) {
-        let coinName = coinObjs[coinObj].name; 
-        let coinId = coinObjs[coinObj].id;
-        let ticker = coinObjs[coinObj].symbol;
-        let marketCap = coinObjs[coinObj].quotes.USD.market_cap;
-        let circSupply = coinObjs[coinObj].circulating_supply
-        let rank = coinObjs[coinObj].rank;
-        let exPerc24h = coinObjs[coinObj].quotes.USD.percent_change_24h;
-        let exVol24h = coinObjs[coinObj].quotes.USD.volume_24h;
-        let price = coinObjs[coinObj].quotes.USD.price;
-        let logo = (coinMapArray.includes(coinName) ? coinMap[coinName].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
-        let year = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].year : "")
-        let maxSupply = coinObjs[coinObj].max_supply;
-        let description = (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].description : "")
-        let proofType = (coinMapArray.includes(coinName) ? coinMap[coinName].proofType :"");
-        let algorithm = (coinMapArray.includes(coinName) ? coinMap[coinName].algorithm :"");
-        let founder= (cryptoNonFinancialArray.includes(coinName) ? cryptoNonFinancial[`${coinName}`].founder : "")
-                                
-        let divMiddleMain = document.getElementById(`middleMain`);
-        let cardMain = document.createElement(`div`);
-            cardMain.className = (`cardMain`);
-        let cardAdd = document.createElement(`div`);
-            cardAdd.className = (`cardMain`);       
-        let divMainGuts = document.createElement(`div`);
-            divMainGuts.className = (`divMainGuts`);
+    for (let coinObj in data.data) {
+        let logo = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].logo :"https://opengameart.org/sites/default/files/Coin_0.png");
+        let year = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].year : "")
+        let description = (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].description : "")
+        let proofType = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].proofType :"");
+        let algorithm = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].algorithm :"");
+        let founder= (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].founder : "")                    
+            document.createElement(`div`).className = (`cardMain`);
+            document.createElement(`div`).className = (`cardMain`);       
+            document.createElement(`div`).className = (`divMainGuts`);
             
         // if the current element matches one in the querystring add array
         // make a BIG card
-        if (splitAdd.includes(`${coinId}`) && cardCount < 5) {
+        if (splitAdd.includes(`${data.data[coinObj].id}`) && cardCount < 5) {
             cardCount++;
 
             let addData;
@@ -159,48 +140,40 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 limitData = ``;
             };
-            cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
-                cardMain.innerHTML = (`
-                <form method="GET"><nobr>${coinName}<button class="remove" type="submit">X</button></nobr>
+            document.createElement(`div`).style.border = (`3px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
+                document.createElement(`div`).innerHTML = (`
+                <form method="GET"><nobr>${data.data[coinObj].name}<button class="remove" type="submit">X</button></nobr>
                 ${limitData}
                 ${persistData}
                 ${addData}
-                <input type="hidden" name="remove" value="${coinId}"></form>
+                <input type="hidden" name="remove" value="${data.data[coinObj].id}"></form>
                 `);
-            divMainGuts.innerHTML = (`
+            document.createElement(`div`).innerHTML = (`
                 <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" style="float:left;">
-                <font style="font-size:18px;" style="text-align:top;"><b>${ticker}</b></font>
+                <font style="font-size:18px;" style="text-align:top;"><b>${data.data[coinObj].symbol}</b></font>
                 <br><font style="font-size:11px;">Since ${year}</font>
-                <p><font style="font-size:12px;"><b>$${round(price, 6)}</b></font>
-                <p><font style="font-size:10px;"><b>#${rank} in Market Cap</b></font>
-                <br><font style="font-size:10px;">($${marketCap})</font>
-                <p><font style="font-size:10px;">%Change 24h <b>${exPerc24h}</b></font>
-                <br><font style="font-size:10px;">Exchange Vol 24h <b>${exVol24h}</b></font>
-                <br><font style="font-size:10px;">Max Supply <b>${maxSupply}</b></font>
-                <br><font style="font-size:10px;">Circulating Supply <b>${circSupply}</b></font>
+                <p><font style="font-size:12px;"><b>$${round(data.data[coinObj].quotes.USD.price, 6)}</b></font>
+                <p><font style="font-size:10px;"><b>#${data.data[coinObj].rank} in Market Cap</b></font>
+                <br><font style="font-size:10px;">($${data.data[coinObj].quotes.USD.market_cap})</font>
+                <p><font style="font-size:10px;">%Change 24h <b>${data.data[coinObj].quotes.USD.percent_change_24h}</b></font>
+                <br><font style="font-size:10px;">Exchange Vol 24h <b>${data.data[coinObj].quotes.USD.volume_24h}</b></font>
+                <br><font style="font-size:10px;">Max Supply <b>${data.data[coinObj].max_supply}</b></font>
+                <br><font style="font-size:10px;">Circulating Supply <b>${data.data[coinObj].circulating_supply}</b></font>
                 <br><font style="font-size:10px;">Consensus Type <b>${proofType}</b></font>
                 <br><font style="font-size:10px;">Hash Algorithm <b>${algorithm}</b></font>
                 <br><font style="font-size:10px;">Founder(s) <b>${founder}</b></font>
                 <p><font style="font-size:8px;"><i>${description}</i></font>
                 `);
-            divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
-            cardMain.appendChild(divMainGuts);
-            divMiddleMain.appendChild(cardMain);
+            document.createElement(`div`).style.border = (`2px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
+            document.createElement(`div`).appendChild(document.createElement(`div`));
+            document.getElementById(`middleMain`).appendChild(document.createElement(`div`));
             divScroll.style.height = (`300px`);
         } else {
             // make thumbnail
-            let addData;
-            if (searchAdd) {
-                addData = `<input type="hidden" name="add" value="${searchAdd},${coinId}"></input>`;
-            } else {
-                addData = `<input type="hidden" name="add" value="${coinId}"></input>`;
-            };
-            let limitData;
-            if (searchLimit) {
-                limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
-            } else {
-                limitData = ``;
-            };
+            
+            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd},${data.data[coinObj].id}"></input>` : `<input type="hidden" name="add" value="${data.data[coinObj].id}"></input>`)
+            let limitData = (searchLimit ? `<input type="hidden" name="limit" value="${searchLimit}"></input>` : ``)
+            
             // make thumb into big card aka 'thumbButton'
             let thumbForm = document.createElement(`form`);
                 thumbForm.method = (`GET`);
@@ -209,18 +182,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 thumbButton.className = (`thumbButton`);
             let divThumb = document.createElement(`div`);
             divThumb.className = (`divThumb`);
-            divThumb.textContent = (`${coinName}`);
+            divThumb.textContent = (`${data.data[coinObj].name}`);
             let divThumbGuts = document.createElement(`div`);
             divThumbGuts.className = (`divThumbGuts`);
-            divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
+            divThumbGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
             divThumbGuts.innerHTML = (`
-            ${ticker}
+            ${data.data[coinObj].symbol}
                 <br><img src="${logo}" alt="logo" height = "100px" width = "100px" align="center" style="margin:7px">
             <input type="hidden" name="search" value="${searchData}">
             ${limitData}
             ${addData}
             `)
-            divThumb.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
+            divThumb.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
             divThumb.appendChild(divThumbGuts);
             thumbButton.appendChild(divThumb);
             thumbForm.appendChild(thumbButton);
