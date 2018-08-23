@@ -1,6 +1,4 @@
-
-    //Example for object navigation
-//console.log(topCoins.data[nameId.Bitcoin].quotes.USD.percent_change_24h)
+//topCoins is an object of top 100 coins from CoinMarketCap.com. The purpose here is to add coin "id" to the coinMap reference object.
 
 const topCoins = {
     "data": {
