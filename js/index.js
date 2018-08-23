@@ -112,9 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let proofType = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].proofType :"");
         let algorithm = (coinMapArray.includes(data.data[coinObj].name) ? coinMap[data.data[coinObj].name].algorithm :"");
         let founder= (cryptoNonFinancialArray.includes(data.data[coinObj].name) ? cryptoNonFinancial[`${data.data[coinObj].name}`].founder : "");             
-            document.createElement(`div`).className = (`cardMain`);
-            document.createElement(`div`).className = (`cardMain`);       
-            document.createElement(`div`).className = (`divMainGuts`);
+        
+        let divMiddleMain = document.getElementById(`middleMain`);
+        let cardMain = document.createElement(`div`);
+            cardMain.className = (`cardMain`);
+        let cardAdd = document.createElement(`div`);
+            cardAdd.className = (`cardMain`);       
+        let divMainGuts = document.createElement(`div`);
+            divMainGuts.className = (`divMainGuts`);
             
         // if the current element matches one in the querystring add array
         // make a BIG card
@@ -125,15 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
             let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd}"></input>` : ``);
             let persistData = (searchData ? `<input type="hidden" name="search" value="${searchData}"></input>` : ``);
             let limitData = (searchLimit ? `<input type="hidden" name="limit" value="${searchLimit}"></input>` : ``);
-            cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
+                cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
                 cardMain.innerHTML = (`
-                <form method="GET"><nobr>${coinName}<button class="remove" type="submit">X</button></nobr>
+                <form method="GET"><nobr>${data.data[coinObj].name}<button class="remove" type="submit">X</button></nobr>
                 ${limitData}
                 ${persistData}
                 ${addData}
                 <input type="hidden" name="remove" value="${data.data[coinObj].id}"></form>
                 `);
-            document.createElement(`div`).innerHTML = (`
+                divMainGuts.innerHTML = (`
                 <img src="${logo}" alt="logo" class="mainLogo" height ="100px" width ="100px" style="float:left;">
                 <font style="font-size:18px;" style="text-align:top;"><b>${data.data[coinObj].symbol}</b></font>
                 <br><font style="font-size:11px;">Since ${year}</font>
@@ -149,9 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <br><font style="font-size:10px;">Founder(s) <b>${founder}</b></font>
                 <p><font style="font-size:8px;"><i>${description}</i></font>
                 `);
-            document.createElement(`div`).style.border = (`2px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
-            document.createElement(`div`).appendChild(document.createElement(`div`));
-            document.getElementById(`middleMain`).appendChild(document.createElement(`div`));
+            divMainGuts.style.border = (`2px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
+            cardMain.appendChild(divMainGuts);
+            divMiddleMain.appendChild(cardMain);
             divScroll.style.height = (`300px`);
         } else {
             // make thumbnail
