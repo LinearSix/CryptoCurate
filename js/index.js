@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // FETCH 
     //from CoinMarketCap.com API
-    fetch(`${cors}${searchMain}`)
+    fetch(`${searchMain}`)
         .then(response => response.json())
         .then( (data) => {
         // console.log(data);
