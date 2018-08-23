@@ -30,4 +30,4 @@ You can also copy the URL and send it to another device for viewing on that devi
 The large-size compare cards, search criteria, and quantity criteria are all stored in the URL. 
 Keep in mind that the information retrieved is constantly updated, so the same search today will yield a different coin deck tomorrow.
 
-### Cryptocurrency is here to stay. We hope this application will welcome new participants into this exciting new market. 
+### Cryptocurrency is here to stay. We hope CyrptoCurious will welcome new participants into this exciting new market. 
