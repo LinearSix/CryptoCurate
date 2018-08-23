@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchAdd = (urlParams.get(`add`));
     let searchRemove = (urlParams.get(`remove`));
 
-//Adding and removing from primary viewing area
-    // HANDLE QUERYSTRING 
+// check users choice of radio buttons for return quantity and keep their choice checked
     let limit;
     if (searchLimit) {
         switch (searchLimit) {
@@ -122,27 +121,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (splitAdd.includes(`${data.data[coinObj].id}`) && cardCount < 5) {
             cardCount++;
 
-            let addData;
-            let persistData;
-            let limitData;
-            if (searchAdd) {
-                addData = `<input type="hidden" name="add" value="${searchAdd}"></input>`;
-            } else {
-                addData = ``;
-            };
-            if (searchData) {
-                persistData = `<input type="hidden" name="search" value="${searchData}"></input>`;
-            } else {
-                persistData = ``;
-            };
-            if (searchLimit) {
-                limitData = `<input type="hidden" name="limit" value="${searchLimit}"></input>`;
-            } else {
-                limitData = ``;
-            };
-            document.createElement(`div`).style.border = (`3px solid #${lightenColor(intToRGB(hashCode(data.data[coinObj].name)),20)}`);
-                document.createElement(`div`).innerHTML = (`
-                <form method="GET"><nobr>${data.data[coinObj].name}<button class="remove" type="submit">X</button></nobr>
+            // check URL for passed data and keep it alive with hidden fields
+            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd}"></input>` : ``);
+            let persistData = (searchData ? `<input type="hidden" name="search" value="${searchData}"></input>` : ``);
+            let limitData = (searchLimit ? `<input type="hidden" name="limit" value="${searchLimit}"></input>` : ``);
+            cardMain.style.border = (`3px solid #${lightenColor(intToRGB(hashCode(coinName)),20)}`);
+                cardMain.innerHTML = (`
+                <form method="GET"><nobr>${coinName}<button class="remove" type="submit">X</button></nobr>
                 ${limitData}
                 ${persistData}
                 ${addData}
@@ -170,11 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
             divScroll.style.height = (`300px`);
         } else {
             // make thumbnail
-            
-            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd},${data.data[coinObj].id}"></input>` : `<input type="hidden" name="add" value="${data.data[coinObj].id}"></input>`)
+            // check URL for passed data and keep it alive with hidden fields
+            let addData = (searchAdd ? `<input type="hidden" name="add" value="${searchAdd},${coinId}"></input>` : `<input type="hidden" name="add" value="${coinId}"></input>`)
             let limitData = (searchLimit ? `<input type="hidden" name="limit" value="${searchLimit}"></input>` : ``)
-            
-            // make thumb into big card aka 'thumbButton'
+            // this makes each thumbnail a button encapsulated in a form
             let thumbForm = document.createElement(`form`);
                 thumbForm.method = (`GET`);
             let thumbButton = document.createElement(`button`);
