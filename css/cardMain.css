@@ -1,9 +1,9 @@
 div#middleMain{
     width: 99%;
-    /* height: 200px; */
+    /* height: 0px; NO!*/
     background-color: #e6e9e8;
     border-top: 1px solid rgb(107, 107, 107);
-    overflow: scroll;
+    /* overflow: scroll; NO!*/
 }
 div.cardMain{
     width: 250px;
