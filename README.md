@@ -32,5 +32,5 @@ Keep in mind that the information retrieved is constantly updated, so the same s
 
 ### Cryptocurrency is here to stay. We hope CyrptoCurious will welcome new participants into this exciting new market.
 
-#### If you'd like to read more about the development process of this project, a short blog can be found here.
+If you'd like to read more about the development process of this project, a short blog can be found here.
 https://medium.com/@linearsix/my-q1-cryptocurious-project-adventure-e145be00c877
