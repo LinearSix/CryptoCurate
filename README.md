@@ -12,7 +12,7 @@ The CryptoCurious web application utilizes three infomation sources and seemless
 * Add and remove coin cards from your comparison window until you find the right mix
 * Bookmark your results to view later or email/text the URL to another device or a friend
 
-##### We recommend using the Google Chrome browser in full-screen mode for the best experience.
+#### We recommend using the Google Chrome browser in full-screen mode for the best experience.
 
 ## Search for Coins:
 By default, the screen is populated with the 25 cryptocurrencies with the highest market cap.
