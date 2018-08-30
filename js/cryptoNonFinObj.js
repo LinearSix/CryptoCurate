@@ -387,7 +387,7 @@ const cryptoNonFinancial = {
     "consensusAlgorithm": "PoW",
     "description": "Also acts as an alternative, decentralized DNS."
   },
-  "Dash":{
+  "DASH":{
     "year": 2014,
     "status": "Active",
     "name": "Dash",
